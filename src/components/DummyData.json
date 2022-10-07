@@ -1,0 +1,42 @@
+{
+    "name": "Alexander Mikalauskas",
+    "Projects": [
+        {
+            "name": "Decentralized Token Exchange App",
+            "timestamp": "(Apr 2022 - Jul 2022)",
+            "explanationBulletPoints": "Web application that enables users to buy or sell a custom ERC-20 token in exchange of Ethereum; Requires Ropsten ETH and a Metamask Account. Allows users to deposit tokens or Ethereum from their wallet onto the Exchange; Can also withdraw from the Exchange back to the wallet. Created Token and Exchange Smart Contracts using Solidity. Implemented TDD to assure correct functionality among smart contract methods. Deployed Smart Contracts to the Ropsten Test Network using Truffle",
+            "techStack": "React.js, Redux, Solidity, TDD, Truffle, Ganache, CSS modules, HTML"
+        },
+        {
+            "name": "Crypto Login Authentication App",
+            "timestamp": "(Jul 2021 - Present)",
+            "explanationBulletPoints": "Web application that enables users to add crypto coins from a table to their watchlist with a fully functioning login system verified using JWTs. Implemented the entire login system to allow CRUD Operations on the user list and user validation. Designed and created a fully responsive home page with a table, chart, and a search system using the Coin Gecko API & deployed using Netlify. Designed API Controllers on the Backend & deployed using Heroku",
+            "techStack": "React.js, Asynchronous API(async/await), Hooks(State/Effect), MongoDB, Express, Axios, Custom Hooks & REST API"
+        }
+    ],
+    "Education": "High School Degree, Flower Mound High School. Graduated December 2021",
+    "Skills": {
+        "Frontend Development": [
+            "React.js",
+            "Angular",
+            "Javascript & Typescript",
+            "HTML & CSS",
+            "Tailwind & Bootstrap"
+        ],
+        "Backend Development": [
+            "C#",
+            "ASP.NET",
+            "MongoDB",
+            "Node & Express",
+            "SQL & LINQ"
+        ],
+        "Soft Skills": [
+            "Fast and Eager Learner",
+            "Self-motivated",
+            "Constant and Never Ending Improvement",
+            "Good listener",
+            "Able to take both responsibility and criticism"
+        ]
+    },
+    "OtherProjects": "High School Degree, Flower Mound High School. Graduated December 2021"
+}
