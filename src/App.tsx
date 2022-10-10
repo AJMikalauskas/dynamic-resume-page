@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState, Suspense } from "react";
+import LoadingSpinner from "./components/UI/LoadingSpinner";
 // import "./App.css";
 // // import bgImg from "../src/img/microsoft-bg.png";
 // import ethIcon from "../src/img/eth.png";
@@ -14,6 +15,10 @@ import { useState } from "react";
 // import githubIcon from "../src/img/github.png";
 // import settingsIcon from "../src/img/settings.png"
 
+import microsoftTemplateSmall from "./img/microsoftTemplateSmall.png";
+import googleTemplateSmall from "./img/googleTemplateSmall.png";
+import facebookTemplateSmall from "./img/facebookTemplateSmall.png";
+
 import FacebookResumeTemplate from "./components/FacebookTemplate";
 import GoogleResumeTemplate from "./components/GoogleResumeTemplate";
 import MicrosoftResumeTemplate from "./components/MicrosoftResumeTemplate";
@@ -25,84 +30,57 @@ import MicrosoftResumeTemplate from "./components/MicrosoftResumeTemplate";
 //   }
 // ]
 import "./App.css";
+import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
+import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
+import { Route, Routes } from "react-router-dom";
+import NewsLetterSubscribe from "./components/NewsLetterSubscribe";
+
+const MicrosoftTemplate = React.lazy(() => import("./components/MicrosoftResumeTemplate"));
+const GoogleTemplate = React.lazy(() => import("./components/GoogleResumeTemplate"));
+const FacebookTemplate = React.lazy(() => import("./components/FacebookTemplate"));
 
 function App() {
-  const [microsoftTemplateShowing, setMicrosoftTemplateShowing] =
-    useState(true);
-  const [googleTemplateShowing, setGoogleTemplateShowing] = useState(false);
-  const [facebookTemplateShowing, setFacebookTemplateShowing] = useState(false);
 
   return (
-    <>
-      <div
-        id="carouselExampleCrossfade"
-        className="carousel slide carousel-fade relative"
-        data-bs-ride="carousel"
-      >
-        {/* <div className="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
-          <button
-            type="button"
-            data-bs-target="#carouselExampleCrossfade"
-            data-bs-slide-to="0"
-            className="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleCrossfade"
-            data-bs-slide-to="1"
-            aria-label="Slide 2"
-          ></button>
-          <button
-            type="button"
-            data-bs-target="#carouselExampleCrossfade"
-            data-bs-slide-to="2"
-            aria-label="Slide 3"
-          ></button>
-        </div> */}
-        <div className="carousel-inner relative w-full overflow-hidden">
-          <div className="carousel-item active float-left w-full">
-            <MicrosoftResumeTemplate/>
-          </div>
-          <div className="carousel-item float-left w-full">
-            <GoogleResumeTemplate/>
-          </div>
-          <div className="carousel-item float-left w-full">
-            <FacebookResumeTemplate/>
-          </div>
+    <div className="bg-gray-500">
+    <Suspense
+      fallback={
+        <div className="">
+          <LoadingSpinner />
         </div>
-        <button
-          className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
-          type="button"
-          data-bs-target="#carouselExampleCrossfade"
-          data-bs-slide="prev"
-        >
-          <span
-            className="carousel-control-prev-icon inline-block bg-no-repeat"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button
-          className="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
-          type="button"
-          data-bs-target="#carouselExampleCrossfade"
-          data-bs-slide="next"
-        >
-          <span
-            className="carousel-control-next-icon inline-block bg-no-repeat"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Next</span>
-        </button>
+      }
+    >
+      <Routes>
+        <Route path="/" element={
+    <div className="h-screen p-9">
+      <div className="mt-[200px] mx-[5%] justify-evenly flex h-[400px]">
+        <a href="/microsoft" className="hover:scale-125 text-center text-white" style={{transition: "transform .5s"}}>
+          <div>Microsoft</div>
+          <img src={microsoftTemplateSmall} alt="microsoft-template-small" className=" w-[200px] items-center flex h-full" />
+        </a>
+        <a href="/google" className="hover:scale-125 text-center text-white" style={{transition: "transform .5s"}}>
+          <div>Google</div>
+          <img src={googleTemplateSmall} alt="google-template-small" className="items-center flex h-full" style={{transition: "transform .5s"}}/>
+        </a>
+        <a href="/facebook" className="hover:scale-125 text-center text-white" style={{transition: "transform .5s"}}>
+          <div>Facebook</div>
+          <img src={facebookTemplateSmall} alt="facebook-template-small" className="h-full items-center flex" style={{transition: "transform .5s"}}/>
+        </a>
       </div>
-      {/* <h1 className="fade-in">Fade me in scotty</h1>
-      <h1 className="fade-out">Fade me out scotty</h1> */}
-      {/* <MicrosoftResumeTemplate/> */}
-      {/* <GoogleResumeTemplate/> */}
-      {/* <FacebookResumeTemplate /> */}
-    </>
+      {/* <div className="bottom-0 absolute mb-10 mx-[35%] w-[300px] text-center">
+        <p>Subscribe to my awesome newsletter</p>
+        <NewsLetterSubscribe/>
+        <button className="border-2 mt-2">Subscribe!</button>
+      </div> */}
+    </div>
+        } >
+        </Route>
+        <Route path="google" element={<GoogleTemplate/>}/>
+        <Route path="microsoft" element={<MicrosoftTemplate/>}/>
+          <Route path="facebook" element={<FacebookTemplate/>}/>
+    </Routes>
+    </Suspense>
+    </div>
   );
 }
 

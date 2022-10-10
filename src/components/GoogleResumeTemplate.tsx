@@ -53,13 +53,13 @@ function GoogleResumeTemplate() {
   const otherProjSplit = OtherProjects.split(".");
 
   return (
-    <div className="max-w-[1000px] flex m-auto p-4 justify-center w-full h-full">
+    <div className="max-w-[1000px] flex m-auto p-9 justify-center w-full h-full ">
         {/* <div className="float-left w-[15%] h-[10%] mt-[40%]">
             <a className="hover:cursor-pointer">
                 <BsFillArrowLeftCircleFill size="50px" className=" rounded-[50%] border-1 border-blue-500" />
             </a>
         </div> */}
-      <div className="rounded-md mx-auto border-2 h-[93vh] w-[63%] text-black p-2 float-left">
+      <div className="rounded-md mx-auto border-2 h-[93vh] w-[63%] text-black p-2 float-left bg-white">
         <div className="w-full h-[17%] relative">
           <div className="">
             <img
@@ -105,11 +105,11 @@ function GoogleResumeTemplate() {
                 </div> */}
           </div>
           <div
-            className="bottom-0 absolute w-full p-4 text-lg"
+            className="bottom-0 absolute w-full p-4 text-lg "
             style={{ fontSize: "10px", lineHeight: 0 }}
           >
             <ul>
-              <li className="inline-block text-sky-700 font-semibold border-b-2 border-b-sky-700 max-w-[25%]">
+              <li className="inline-block text-sky-700 font-semibold border-b-2 border-b-sky-700">
                 <img
                   src={googleSearchIcon}
                   alt="google-search-icon"

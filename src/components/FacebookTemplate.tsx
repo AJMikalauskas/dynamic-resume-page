@@ -53,7 +53,7 @@ function FacebookResumeTemplate() {
   const otherProjSplit = OtherProjects.split(".");
 
   return (
-    <div className="max-w-[1000px] mx-auto p-8 flex justify-center w-full h-full">
+    <div className="max-w-[1000px] mx-auto p-9 flex justify-center w-full h-full">
         {/* <div className="float-left w-[15%] h-[10%] mt-[40%]">
             <a className="hover:cursor-pointer">
                 <BsFillArrowLeftCircleFill size="50px" className=" rounded-[50%] border-1 border-blue-500" />
@@ -84,14 +84,14 @@ function FacebookResumeTemplate() {
                 <img
                     src={linkedInIcon}
                     alt="linked-circle-icon"
-                    className="w-[30px] pt-3 mr-2 float-left"
+                    className="w-[25px] pt-3 mr-2 float-left"
                 />
               </a>
               <a href="https://github.com/AJMikalauskas">
               <img
                 src={githubIcon}
                 alt="github-icon"
-                className="w-[30px] pt-3 mr-2"
+                className="w-[25px] pt-3 mr-2"
               />
               </a>
             </div>
