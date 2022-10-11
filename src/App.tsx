@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import React, { Suspense } from "react";
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 // import "./App.css";
 // // import bgImg from "../src/img/microsoft-bg.png";
@@ -19,9 +19,9 @@ import microsoftTemplateSmall from "./img/microsoftTemplateSmall.png";
 import googleTemplateSmall from "./img/googleTemplateSmall.png";
 import facebookTemplateSmall from "./img/facebookTemplateSmall.png";
 
-import FacebookResumeTemplate from "./components/FacebookTemplate";
-import GoogleResumeTemplate from "./components/GoogleResumeTemplate";
-import MicrosoftResumeTemplate from "./components/MicrosoftResumeTemplate";
+// import FacebookResumeTemplate from "./components/FacebookTemplate";
+// import GoogleResumeTemplate from "./components/GoogleResumeTemplate";
+// import MicrosoftResumeTemplate from "./components/MicrosoftResumeTemplate";
 
 // const socialIcons: {icon: JSX.Element, url: string}[] = [
 //   {
@@ -30,10 +30,10 @@ import MicrosoftResumeTemplate from "./components/MicrosoftResumeTemplate";
 //   }
 // ]
 import "./App.css";
-import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
-import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
+//import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
+//import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 import { Route, Routes } from "react-router-dom";
-import NewsLetterSubscribe from "./components/NewsLetterSubscribe";
+//import NewsLetterSubscribe from "./components/NewsLetterSubscribe";
 
 const MicrosoftTemplate = React.lazy(() => import("./components/MicrosoftResumeTemplate"));
 const GoogleTemplate = React.lazy(() => import("./components/GoogleResumeTemplate"));

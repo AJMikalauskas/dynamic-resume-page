@@ -1,37 +1,37 @@
-import { useState } from "react";
-import "./MicrosoftResumeTemplate.css";
+// import { useState } from "react";
+// import "./MicrosoftResumeTemplate.css";
 // import bgImg from "../src/img/microsoft-bg.png";
-import ethIcon from "../../src/img/eth.png";
-import fmhsIcon from "../../src/img/fmhsLogo.png";
+// import ethIcon from "../../src/img/eth.png";
+// import fmhsIcon from "../../src/img/fmhsLogo.png";
 import {
   AiOutlineSearch,
-  AiOutlineCaretDown,
-  AiOutlineCaretUp,
-  AiOutlineCaretRight,
-  AiOutlinePoweroff,
+  // AiOutlineCaretDown,
+  // AiOutlineCaretUp,
+  // AiOutlineCaretRight,
+  // AiOutlinePoweroff,
 } from "react-icons/ai";
 //import linkedinPicOfMe from "../src/img/linkedinprofile.png";
-import windows11Icon from "../../src/img/windows-11-icon.png";
-import taskViewIcon from "../../src/img/task-view.png";
-import fileExplorerIcon from "../../src/img/file-explorer.png";
-import mailIcon from "../../src/img/mail.png";
-import phoneIcon from "../../src/img/mobile-phone.png";
-import linkedInIcon from "../../src/img/linkedin.png";
-import githubIcon from "../../src/img/github.png";
-import settingsIcon from "../../src/img/settings.png";
+// import windows11Icon from "../../src/img/windows-11-icon.png";
+// import taskViewIcon from "../../src/img/task-view.png";
+// import fileExplorerIcon from "../../src/img/file-explorer.png";
+// import mailIcon from "../../src/img/mail.png";
+// import phoneIcon from "../../src/img/mobile-phone.png";
+// import linkedInIcon from "../../src/img/linkedin.png";
+// import githubIcon from "../../src/img/github.png";
+// import settingsIcon from "../../src/img/settings.png";
 
 import googleLogo from "../img/google-logo.png";
 import xIcon from "../img/x-icon.png";
 import keyboardIcon from "../img/keyboard-icon.png";
 import googleMicIcon from "../img/google-mic-icon.png";
-import searchIcon from "../img/search-icon.png";
+//import searchIcon from "../img/search-icon.png";
 import googleSearchIcon from "../img/google-search.png";
 import dummyData from "./DummyData.json";
 import smallLinkedinPhoto from "../img/linkedin-circular-photo.png";
 import defaultImageIcon from "../img/mountain-image-icon.png";
 import mapPinIcon from "../img/map-pin-icon.png";
 import newsIcon from "../img/news-icon.png";
-import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
+//import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
 
 // const socialIcons: {icon: JSX.Element, url: string}[] = [
 //   {
@@ -41,16 +41,17 @@ import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-ico
 // ]
 
 function GoogleResumeTemplate() {
-  const [proj1Showing, setProj1Showing] = useState(false);
-  const [proj2Showing, setProj2Showing] = useState(false);
-  const [frontendSkillsShowing, setFrontendSkillsShowing] = useState(true);
-  const [backendSkillsShowing, setBackendSkillsShowing] = useState(true);
-  const { name, Projects, Education, Skills, OtherProjects } = dummyData;
+  // const [proj1Showing, setProj1Showing] = useState(false);
+  // const [proj2Showing, setProj2Showing] = useState(false);
+  // const [frontendSkillsShowing, setFrontendSkillsShowing] = useState(true);
+  // const [backendSkillsShowing, setBackendSkillsShowing] = useState(true);
+  // OtherProjects, Education
+  const { name, Projects, Skills } = dummyData;
 
   const project1BulletPoints = Projects[0].explanationBulletPoints.split(".");
   const project2BulletPoints = Projects[1].explanationBulletPoints.split(".");
-  const educationSplit = Education.split(".");
-  const otherProjSplit = OtherProjects.split(".");
+  // const educationSplit = Education.split(".");
+  // const otherProjSplit = OtherProjects.split(".");
 
   return (
     <div className="max-w-[1000px] flex m-auto p-9 justify-center w-full h-full ">

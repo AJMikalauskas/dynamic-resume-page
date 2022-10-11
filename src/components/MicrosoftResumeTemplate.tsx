@@ -3,10 +3,11 @@ import "./MicrosoftResumeTemplate.css";
 // import bgImg from "../src/img/microsoft-bg.png";
 import ethIcon from "../img/eth.png";
 import fmhsIcon from "../img/fmhsLogo.png";
-import {AiOutlineSearch, AiOutlineCaretDown, AiOutlineCaretUp, AiOutlineCaretRight, AiOutlinePoweroff}  from "react-icons/ai";
+// AiOutlinePoweroff
+import {AiOutlineSearch, AiOutlineCaretDown, AiOutlineCaretUp, AiOutlineCaretRight}  from "react-icons/ai";
 //import linkedinPicOfMe from "../src/img/linkedinprofile.png";
 import windows11Icon from "../img/windows-11-icon.png";
-import taskViewIcon from "../img/task-view.png";
+//import taskViewIcon from "../img/task-view.png";
 import fileExplorerIcon from "../img/file-explorer.png";
 import mailIcon from "../img/mail.png";
 import phoneIcon from "../img/mobile-phone.png";
@@ -16,7 +17,7 @@ import settingsIcon from "../img/settings.png"
 import bibleIcon from "../img/bible-icon.png"
 import googleMapsIcon from "../img/google-maps-icon.png";
 import dummydata from "./DummyData.json";
-import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
+//import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
 
 // const socialIcons: {icon: JSX.Element, url: string}[] = [
 //   {
@@ -31,12 +32,13 @@ function MicrosoftResumeTemplate() {
   const [proj2Showing, setProj2Showing] = useState(false);
   const [frontendSkillsShowing, setFrontendSkillsShowing] = useState(true);
   const [backendSkillsShowing, setBackendSkillsShowing] = useState(true);
-  const { name, Projects, Education, Skills, OtherProjects } = dummydata;
+  // OtherProjects
+  const { name, Projects, Education, Skills } = dummydata;
     // Arrays of Bullet Points
   const project1BulletPoints = Projects[0].explanationBulletPoints.split(".");
   const project2BulletPoints = Projects[1].explanationBulletPoints.split(".");
   const educationSplit = Education.split(".");
-  const otherProjSplit = OtherProjects.split(".");
+ // const otherProjSplit = OtherProjects.split(".");
   
 // project1BulletPoints.map((bp) => {
 //     return console.log(bp);  
