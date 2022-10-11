@@ -32,7 +32,7 @@ import facebookTemplateSmall from "./img/facebookTemplateSmall.png";
 import "./App.css";
 //import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
 //import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 //import NewsLetterSubscribe from "./components/NewsLetterSubscribe";
 
 const MicrosoftTemplate = React.lazy(() => import("./components/MicrosoftResumeTemplate"));
@@ -54,18 +54,18 @@ function App() {
         <Route path="/" element={
     <div className="h-screen p-9">
       <div className="mt-[200px] mx-[5%] justify-evenly flex h-[400px]">
-        <a href="/microsoft" className="hover:scale-125 text-center text-white" style={{transition: "transform .5s"}}>
+        <Link to="/microsoft" className="hover:scale-125 text-center text-white" style={{transition: "transform .5s"}}>
           <div>Microsoft</div>
           <img src={microsoftTemplateSmall} alt="microsoft-template-small" className=" w-[200px] items-center flex h-full" />
-        </a>
-        <a href="/google" className="hover:scale-125 text-center text-white" style={{transition: "transform .5s"}}>
+        </Link>
+        <Link to="/google" className="hover:scale-125 text-center text-white" style={{transition: "transform .5s"}}>
           <div>Google</div>
           <img src={googleTemplateSmall} alt="google-template-small" className="items-center flex h-full" style={{transition: "transform .5s"}}/>
-        </a>
-        <a href="/facebook" className="hover:scale-125 text-center text-white" style={{transition: "transform .5s"}}>
+        </Link>
+        <Link to="/facebook" className="hover:scale-125 text-center text-white" style={{transition: "transform .5s"}}>
           <div>Facebook</div>
           <img src={facebookTemplateSmall} alt="facebook-template-small" className="h-full items-center flex" style={{transition: "transform .5s"}}/>
-        </a>
+        </Link>
       </div>
       {/* <div className="bottom-0 absolute mb-10 mx-[35%] w-[300px] text-center">
         <p>Subscribe to my awesome newsletter</p>
