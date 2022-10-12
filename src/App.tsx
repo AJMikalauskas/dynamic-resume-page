@@ -33,6 +33,7 @@ import "./App.css";
 //import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
 //import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 import { Route, Routes, Link } from "react-router-dom";
+import NewsletterSubscribe from "./components/NewsLetterSubscribe";
 //import NewsLetterSubscribe from "./components/NewsLetterSubscribe";
 
 const MicrosoftTemplate = React.lazy(() => import("./components/MicrosoftResumeTemplate"));
@@ -53,7 +54,8 @@ function App() {
       <Routes>
         <Route path="/" element={
     <div className="h-screen p-9">
-      <div className="mt-[200px] mx-[5%] justify-evenly flex h-[400px]">
+      <p>Test Intro</p>
+      <div className="mt-[100px] mx-[5%] justify-evenly flex h-[400px]">
         <Link to="/microsoft" className="hover:scale-125 text-center text-white" style={{transition: "transform .5s"}}>
           <div>Microsoft</div>
           <img src={microsoftTemplateSmall} alt="microsoft-template-small" className=" w-[200px] items-center flex h-full" />
@@ -67,6 +69,7 @@ function App() {
           <img src={facebookTemplateSmall} alt="facebook-template-small" className="h-full items-center flex" style={{transition: "transform .5s"}}/>
         </Link>
       </div>
+      <NewsletterSubscribe/>
       {/* <div className="bottom-0 absolute mb-10 mx-[35%] w-[300px] text-center">
         <p>Subscribe to my awesome newsletter</p>
         <NewsLetterSubscribe/>
