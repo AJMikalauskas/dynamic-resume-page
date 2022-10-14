@@ -1,5 +1,5 @@
 //import { useState } from "react";
-import "./GoogleResumeTemplate.css";
+import "./FacebookResumeTemplate.css";
 // import bgImg from "../src/img/microsoft-bg.png";
 import ethIcon from "../../src/img/eth.png";
 import fmhsIcon from "../../src/img/fmhsLogo.png";
@@ -33,6 +33,9 @@ import facebookLogo from "../img/facebook-logo-icon.png";
 // import googleSearchIcon from "../img/google-search.png";
 import dummyData from "./DummyData.json";
 import smallLinkedinPhoto from "../img/linkedin-circular-photo.png";
+import bibleIcon from "../img/bible-icon.png"
+import googleMapsIcon from "../img/google-maps-icon.png";
+import {useNavigate} from 'react-router-dom';
 // import defaultImageIcon from "../img/mountain-image-icon.png";
 // import mapPinIcon from "../img/map-pin-icon.png";
 // import newsIcon from "../img/news-icon.png";
@@ -46,12 +49,20 @@ function FacebookResumeTemplate() {
   // const [frontendSkillsShowing, setFrontendSkillsShowing] = useState(true);
   // const [backendSkillsShowing, setBackendSkillsShowing] = useState(true);
   // OtherProjects
-  const { name, Projects, Education, Skills } = dummyData;
+  const { name, Projects, Education, Skills, OtherProjects } = dummyData;
 
   const project1BulletPoints = Projects[0].explanationBulletPoints.split(".");
   const project2BulletPoints = Projects[1].explanationBulletPoints.split(".");
-  // const educationSplit = Education.split(".");
-  // const otherProjSplit = OtherProjects.split(".");
+  const educationSplit = Education.split(".");
+
+  let navigate = useNavigate();
+  function handleNavToHome(e: any) {
+    e.preventDefault();
+    navigate(-1);
+  }
+
+  const googleMapsData = OtherProjects['Google Maps App'];
+  const bibleRatingData = OtherProjects['Rate App'];
 
   return (
     <div className="max-w-[1000px] mx-auto p-9 flex justify-center w-full h-full">
@@ -60,14 +71,16 @@ function FacebookResumeTemplate() {
                 <BsFillArrowLeftCircleFill size="50px" className=" rounded-[50%] border-1 border-blue-500" />
             </a>
         </div> */}
-      <div className="rounded-md mx-auto border-2 h-[93vh] w-[63%] text-black p-2 bg-[#f1f2f6]">
+      <div className="rounded-md mx-auto border-2 h-[92vh] w-[63%] text-black p-2 bg-[#f1f2f6]">
         <div className="w-full h-[7%] relative">
           <div className="">
+            <div className="hover:cursor-pointer" onClick={handleNavToHome}>
             <img
               src={facebookLogo}
               alt="fb-logo"
               className="w-[10%] h-[30%] float-left"
             />
+            </div>
             <div className="rounded-md bg-[#f1f2f6] mt-4 text-black text-center shadow shadow-black/30 drop-shadow-xl inline-block mx-4 w-[60%] float-left">
               <span className="float-left">
                 <AiOutlineSearch size="25px" />
@@ -81,18 +94,18 @@ function FacebookResumeTemplate() {
                 className="w-[50px] rounded-[50%] ml-3 border-2 border-blue-500 float-left mr-2"
               />
               {/* Create linkes to linkedin and github */}
-              <a href="https://www.linkedin.com/in/alexander-mikalauskas/">
+              <a href="https://www.linkedin.com/in/alexander-mikalauskas/" target="_blank" rel="noreferrer">
                 <img
                     src={linkedInIcon}
                     alt="linked-circle-icon"
                     className="w-[25px] pt-3 mr-2 float-left"
                 />
               </a>
-              <a href="https://github.com/AJMikalauskas">
+              <a href="https://github.com/AJMikalauskas" target="_blank" rel="noreferrer">
               <img
                 src={githubIcon}
                 alt="github-icon"
-                className="w-[25px] pt-3 mr-2"
+                className="w-[25px] pt-3 mr-2 float-left"
               />
               </a>
             </div>
@@ -152,7 +165,7 @@ function FacebookResumeTemplate() {
               </div>
             </div>
             
-          <div className="">
+          <div className="max-h-[82vh] overflow-y-scroll hide-scrollbar">
           <div className="flex justify-center mt-4">
               <div className="rounded-lg shadow-lg bg-white max-w-sm">
                 <div className="p-3 border-b-2">
@@ -184,18 +197,20 @@ function FacebookResumeTemplate() {
               <div className="rounded-lg shadow-lg bg-white max-w-sm">
                 <div className="px-3 pt-3 pb-1">
                     <img src={ethIcon} alt="eth-icon" className="w-[15%] float-left mr-1" />
-                    <a href="https://dapp-exchange.surge.sh/">
-                        <p className="text-sky-700 text-md font-semibold ">
-                            <u>{Projects[0].name}</u>
+                    {/* https://crypto-app-demo.netlify.app/loggedOutHome */}
+                    <a href={Projects[1].link} target="_blank" rel="noreferrer">
+                        <p className="text-sky-700 text-md font-semibold hover:underline">
+                            {Projects[1].name}
                         </p>
                     </a>
                   <p className="text-gray-700 text-xs">
-                    {Projects[0].timestamp}
+                    {Projects[1].timestamp}
                   </p>
                   <p className="text-gray-700 text-xs">
                     <div className="w-[60%] ml-1">
                         {/*  Link to Github For the Project */}
-                        <a href="https://github.com/AJMikalauskas/Decentralized-Token-Exchange-App" className="">
+                        {/* href="https://github.com/AJMikalauskas/full-stack-crypto-app/tree/near-final-version" */}
+                        <a href={Projects[1].github} className="" target="_blank" rel="noreferrer">
                             <img src={githubIcon} alt="github" className="w-[10%] float-left mr-1" />    
                             <p className="pt-1">Github</p>
                         </a> 
@@ -206,7 +221,7 @@ function FacebookResumeTemplate() {
                     <div className="p-3">
                         <ul className="text-xs" style={{fontSize: "9px"}}>
                             {
-                                project1BulletPoints.map((bp,idx) => (
+                                project2BulletPoints.map((bp,idx) => (
                                     <li key={idx} className="mt-1">{bp}</li>
                                 ))
                             }
@@ -230,20 +245,18 @@ function FacebookResumeTemplate() {
               <div className="rounded-lg shadow-lg bg-white max-w-sm">
                 <div className="px-3 pt-3 pb-1">
                     <img src={ethIcon} alt="eth-icon" className="w-[15%] float-left mr-1" />
-                    <a href="https://crypto-app-demo.netlify.app/loggedOutHome">
-                        <p className="text-sky-700 text-md font-semibold ">
-                            <u>
-                                {Projects[1].name}
-                            </u>
+                    <a href={Projects[0].link} target="_blank" rel="noreferrer">
+                        <p className="text-sky-700 text-md font-semibold hover:underline">
+                            {Projects[0].name}
                         </p>
                     </a>
                   <p className="text-gray-700 text-xs">
-                    {Projects[1].timestamp}
+                    {Projects[0].timestamp}
                   </p>
                   <p className="text-gray-700 text-xs">
                     <div className="w-[60%] ml-1">
                         {/*  Link to Github For the Project */}
-                        <a href="https://github.com/AJMikalauskas/full-stack-crypto-app/tree/near-final-version" className="">
+                        <a href={Projects[0].github} className="" target="_blank" rel="noreferrer">
                             <img src={githubIcon} alt="github" className="w-[10%] float-left mr-1" />    
                             <p className="pt-1">Github</p>
                         </a> 
@@ -254,7 +267,7 @@ function FacebookResumeTemplate() {
                     <div className="p-3">
                         <ul className="text-xs" style={{fontSize: "9px"}}>
                             {
-                                project2BulletPoints.map((bp,idx) => (
+                                project1BulletPoints.map((bp,idx) => (
                                     <li key={idx} className="mt-1">{bp}</li>
                                 ))
                             }
@@ -267,7 +280,7 @@ function FacebookResumeTemplate() {
                     >
                     <img
                         className="rounded-t-lg"
-                        src="https://mdbootstrap.com/img/new/standard/nature/182.jpg"
+                        src="https://mdbootstrap.com/img/new/standard/nature/182.jpg" 
                         alt=""
                     />
                     </a> */}
@@ -276,36 +289,74 @@ function FacebookResumeTemplate() {
             </div>
             <div className="flex justify-center mt-4">
               <div className="rounded-lg shadow-lg bg-white max-w-sm">
-                <div className="p-3">
-                    <img src={fmhsIcon} alt="fmhs-icon" className="w-[15%] mb-4 float-left mr-1 rounded-[50%]" />
-                    <p className="text-gray-900 text-md font-semibold ">
-                        Education
-                    </p>
-                  <p className="text-gray-700 text-xs">
-                    {Education}
+                <div className="px-3 pt-3 pb-1">
+                    <img src={googleMapsIcon} alt="google-maps-icon" className="w-[15%] float-left mr-1" />
+                    <a href={googleMapsData.link} target="_blank" rel="noreferrer">
+                        <p className="text-sky-700 text-md font-semibold hover:underline">
+                          {googleMapsData.name}
+                        </p>
+                    </a>
+                  <p className="text-gray-700 text-xs pb-3">
+                    <div className="w-[60%] ml-1">
+                        {/*  Link to Github For the Project */}
+                        <a href={googleMapsData.github} className="" target="_blank" rel="noreferrer">
+                            <img src={githubIcon} alt="github" className="w-[10%] float-left mr-1" />    
+                            <p className="pt-1">Github</p>
+                        </a> 
+                    </div>
                   </p>
                 </div>
                 <div className="border-t-2">
-                    {/* <div className="p-3">
-                        <ul className="text-xs" style={{fontSize: "9px"}}>
-                            {
-                                project2BulletPoints.map((bp,idx) => (
-                                    <li key={idx} className="mt-1">{bp}</li>
-                                ))
-                            }
-                        </ul>
-                    </div> */}
-                    {/* <a
-                    href="#!"
-                    data-mdb-ripple="true"
-                    data-mdb-ripple-color="light"
-                    >
-                    <img
-                        className="rounded-t-lg"
-                        src="https://mdbootstrap.com/img/new/standard/nature/182.jpg"
-                        alt=""
-                    />
-                    </a> */}
+                    <div className="p-3">
+                    <p className="text-xs" style={{ fontSize: "9px"}}>
+                      {googleMapsData.description}
+                    </p>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-center mt-4">
+              <div className="rounded-lg shadow-lg bg-white max-w-sm">
+                <div className="px-3 pt-3 pb-1">
+                    <img src={bibleIcon} alt="bible-icon" className="w-[15%] float-left mr-1" />
+                    <a href={bibleRatingData.link} target="_blank" rel="noreferrer">
+                        <p className="text-sky-700 text-md font-semibold hover:underline">
+                          {bibleRatingData.name}
+                        </p>
+                    </a>
+                  <p className="text-gray-700 text-xs pb-3">
+                    <div className="w-[60%] ml-1">
+                        {/*  Link to Github For the Project */}
+                        <a href={bibleRatingData.github} className="" target="_blank" rel="noreferrer">
+                            <img src={githubIcon} alt="github" className="w-[10%] float-left mr-1" />    
+                            <p className="pt-1">Github</p>
+                        </a> 
+                    </div>
+                  </p>
+                </div>
+                <div className="border-t-2">
+                    <div className="p-3">
+                    <p className="text-xs" style={{ fontSize: "9px"}}>
+                      {bibleRatingData.description}
+                    </p>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-center mt-4">
+              <div className="rounded-lg shadow-lg bg-white max-w-sm">
+                <div className="p-3">
+                    <img src={fmhsIcon} alt="fmhs-icon" className="w-[15%] mb-4 float-left mr-1 rounded-[50%] pt-1" />
+                    <div>
+                      <p className="text-gray-900 text-md font-semibold ">
+                        Education
+                      </p>
+                      <p className="text-gray-700 text-xs">
+                        {educationSplit[0]}
+                      </p>
+                    </div>
+                </div>
+                <div className="border-t-2">
                 </div>
               </div>
             </div>

@@ -7,7 +7,7 @@ import fmhsIcon from "../img/fmhsLogo.png";
 import {AiOutlineSearch, AiOutlineCaretDown, AiOutlineCaretUp, AiOutlineCaretRight}  from "react-icons/ai";
 //import linkedinPicOfMe from "../src/img/linkedinprofile.png";
 import windows11Icon from "../img/windows-11-icon.png";
-//import taskViewIcon from "../img/task-view.png";
+import taskViewIcon from "../img/task-view.png";
 import fileExplorerIcon from "../img/file-explorer.png";
 import mailIcon from "../img/mail.png";
 import phoneIcon from "../img/mobile-phone.png";
@@ -17,6 +17,7 @@ import settingsIcon from "../img/settings.png"
 import bibleIcon from "../img/bible-icon.png"
 import googleMapsIcon from "../img/google-maps-icon.png";
 import dummydata from "./DummyData.json";
+import { Link, useNavigate } from 'react-router-dom';
 //import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
 
 // const socialIcons: {icon: JSX.Element, url: string}[] = [
@@ -33,16 +34,22 @@ function MicrosoftResumeTemplate() {
   const [frontendSkillsShowing, setFrontendSkillsShowing] = useState(true);
   const [backendSkillsShowing, setBackendSkillsShowing] = useState(true);
   // OtherProjects
-  const { name, Projects, Education, Skills } = dummydata;
+  const { name, Projects, Education, Skills, OtherProjects } = dummydata;
     // Arrays of Bullet Points
   const project1BulletPoints = Projects[0].explanationBulletPoints.split(".");
   const project2BulletPoints = Projects[1].explanationBulletPoints.split(".");
   const educationSplit = Education.split(".");
- // const otherProjSplit = OtherProjects.split(".");
-  
-// project1BulletPoints.map((bp) => {
-//     return console.log(bp);  
-// })
+
+  // Navigation to Previous Page
+  let navigate = useNavigate();
+  function handleNavToHome(e: any) {
+    e.preventDefault();
+    navigate(-1);
+  }
+
+  const googleMapsData = OtherProjects['Google Maps App'];
+  const bibleRatingData = OtherProjects['Rate App'];
+
 
   return (
   <div className="max-w-[1000px] m-auto p-9 justify-center w-full h-full"> 
@@ -53,8 +60,8 @@ function MicrosoftResumeTemplate() {
                 <BsFillArrowLeftCircleFill size="50px" className=" rounded-[50%] border-1 border-blue-500" />
             </a>
         </div> */}
-      <div className="rounded-md flex justify-center mx-auto bg-no-repeat bg-cover bg-center custom-img relative h-[93vh] w-[50%]">
-        <div className="rounded-md bg-[#000]/50 mb-[12.5%] p-4 text-white relative max-h-[85vh] overflow-y-auto">
+      <div className="rounded-md justify-center mx-auto bg-no-repeat bg-cover bg-center custom-img relative h-[92vh] w-[50%]">
+        <div className="rounded-md bg-[#000]/50 mb-[12.5%] p-4 text-white relative max-h-[85vh] overflow-y-scroll hide-scrollbar">
           <div className="rounded-md bg-[#fff]/50 h-8 text-center">
             <span className="float-left align-middle mt-1 pl-1">
             <AiOutlineSearch size="25px"/>
@@ -75,19 +82,21 @@ function MicrosoftResumeTemplate() {
               {/*  To Be Dynamic Later */}
                 {/* Mini Arrow Icon to the right of this? */}
                 <span className="font-medium">
-                  {Projects[0].name}
+                  {Projects[1].name}
                 </span>
                 <span className="font-extralight text-sm ml-4">
-                  {Projects[0].timestamp}
+                  {Projects[1].timestamp}
                 </span>
 
                 <div>
                 <span className="font-extralight text-sm">
-                    (<a href="https://dapp-exchange.surge.sh/" className='text-sky-300'>
-                        <u>Demo</u>
+                  {/* Link a tag to new page using target and rel properties/attributes */}
+                  {/* "https://crypto-app-demo.netlify.app/loggedOutHome" */}
+                    (<a href={Projects[1].link} className='text-sky-300 hover:underline' target="_blank" rel="noreferrer">
+                        Demo
                     </a>)
                   - 
-                  (<a href="https://github.com/AJMikalauskas/Decentralized-Token-Exchange-App/tree/completed-deployContracts-section" className='text-sky-300'><u>GitHub</u></a>)
+                  (<a href={Projects[1].github} className='text-sky-300 hover:underline' target="_blank" rel="noreferrer">GitHub</a>)
                 </span>
                 <span className='float-right mr-10'>
                   {/* How to create an accordion animation? */}
@@ -102,20 +111,12 @@ function MicrosoftResumeTemplate() {
             <div className={`${proj1Showing ? '' : 'hidden'}`} >
             <ul style={{ listStyle: 'disc', fontSize: '12px'}} className="float-right pl-20 text-sm pb-4">
             {
-                project1BulletPoints.map((bp,idx) => (
+                project2BulletPoints.map((bp,idx) => (
                     <li key={idx}>{bp}</li>
                 ))
             }
-              {/*  Should I leave a link to ropsten eth faucet? And Metamask? 
-                  <li>Web application that enables users to buy or sell a custom ERC-20 token in exchange of Ethereum; Requires Ropsten ETH and a Metamask Account</li>
-                  {/* <li>Displays Exchange Screens including a token price chart, trades made on the exchange, all active orders waiting to be filled,unfilled orders by the user, and trades made by the user</li> 
-                  <li>Allows users to deposit tokens or Ethereum from their wallet onto the Exchange; Can also withdraw from the Exchange back to the wallet</li>
-                  {/* Link to Solidity *
-                  <li>Created Token and Exchange Smart Contracts using <b><u>Solidity</u></b></li>
-                  <li>Implemented <b><u>TDD</u></b> to assure correct functionality among smart contract methods</li>
-        <li> Deployed Smart Contracts to the Ropsten Test Network using <b><u>Truffle</u></b></li>*/}
             </ul>
-            <p className="text-sm mx-4 "><b><u>Tech Stack:</u></b> {Projects[0].techStack}</p>
+            <p className="text-sm mx-4 "><b><u>Tech Stack:</u></b> {Projects[1].techStack}</p>
             </div>
           </div>
           {/* 2nd Project */}
@@ -125,18 +126,21 @@ function MicrosoftResumeTemplate() {
               {/*  To Be Dynamic Later */}
                 {/* Mini Arrow Icon to the right of this? */}
                 <span className="font-medium">
-                  {Projects[1].name}
+                  {Projects[0].name}
                 </span>
                 <span className="font-extralight text-sm ml-4">
-                  {Projects[1].timestamp}
+                  {Projects[0].timestamp}
                 </span>
 
                 <div>
 
                   <span className="font-extralight text-sm">
-                    (<a href="https://crypto-app-demo.netlify.app/loggedOutHome" className='text-sky-300'><u>Demo</u></a>)
+                    {/* https://dapp-exchange.surge.sh/ */}
+                    (<a href={Projects[0].link} className='text-sky-300 hover:underline' target="_blank" rel="noreferrer">Demo</a>)
                     - 
-                    (<a href="https://github.com/AJMikalauskas/full-stack-crypto-app/tree/near-final-version" className="text-sky-300"><u>GitHub</u></a>)
+                    (<a href={Projects[0].github} className="text-sky-300 hover:underline" target="_blank" rel="noreferrer">GitHub</a>)
+                    -
+                    (<Link to="/crypto-app" className='text-sky-300 hover:underline'>Description</Link>)
                   </span>
 
                   <span className='float-right mr-10'>
@@ -157,35 +161,27 @@ function MicrosoftResumeTemplate() {
                   <li> Designed and created a fully responsive home page with a table, chart, and a search system using the Coin Gecko API & deployed using Netlify</li>
                   <li>Designed API Controllers on the Backend & deployed using Heroku</li> */}
             {
-                project2BulletPoints.map((bp,idx) => (
+                project1BulletPoints.map((bp,idx) => (
                     <li key={idx}>{bp}</li>
                 ))
             }
 
             </ul>
             {/*  Remove duplicates in lists? */}
-            <p className="text-sm mx-4 "><b><u>Tech Stack:</u></b> {Projects[1].techStack}</p>
+            <p className="text-sm mx-4 "><b><u>Tech Stack:</u></b> {Projects[0].techStack}</p>
           </div>
           </div>
           {/* Education Section */}
         <div className="mt-6">
-          <p className="text-2xl font-semibold mb-0">Education</p>
+          <p className="text-2xl font-semibold mb-1">Education</p>
           {/*  Link to flowermound or something with group property? */}
           <div className="rounded-sm bg-[#fff]/30 text-center font-bold h-[50px]">
             <span className="float-left align-middle mt-1 ml-1">
             {/* <AiOutlineSearch size="25px"/> */}
             <img alt="fmhsLogo" src={fmhsIcon} width="75px" className='rounded-lg'/>
             </span>
-            <div className='text-sm pt-1'>
-              <span className="">
+            <div className='text-sm pt-4 pr-2'>
                 {educationSplit[0]}
-                <br/>
-                {educationSplit[1]}
-              </span>
-
-              {/* <span className='float-right mr-2'>
-                <AiOutlineCaretRight size="25px"/>
-              </span> */}
             </div>
           </div>
         </div>
@@ -248,7 +244,7 @@ function MicrosoftResumeTemplate() {
         <div className="mt-6">
           <p className="text-2xl font-semibold mb-2">Other Projects</p>
           {/*  Link to flowermound or something with group property? */}
-          <a href="https://google-maps-filter.surge.sh/" className=''>
+          <div>
           <div className="rounded-sm bg-[#fff]/30 text-left font-bold h-[60px]">
             <span className="float-left align-middle mt-1 ml-1">
             {/* <AiOutlineSearch size="25px"/> */}
@@ -256,9 +252,7 @@ function MicrosoftResumeTemplate() {
             </span>
             <div className='pt-2'>
               <span className="">
-                {/* {otherProjSplit[0]} */}
-                {/* <br/> */}
-                Google Maps Filtering App
+                {googleMapsData.name}
               </span>
 
               <span className='float-right mr-2 mt-3'>
@@ -266,13 +260,13 @@ function MicrosoftResumeTemplate() {
               </span>
 
               <div className='text-xs'>
-                (<a href='https://google-maps-filter.surge.sh/' className='underline text-sky-300'>Demo</a>) 
+                (<a href={googleMapsData.link} className='hover:underline text-sky-300' target="_blank" rel="noreferrer">Demo</a>) 
                 - 
-                (<a href='https://github.com/AJMikalauskas/google-maps-travel-advisor' className='underline text-sky-300'>GitHub</a>)  
+                (<a href={googleMapsData.github} className='hover:underline text-sky-300' target="_blank" rel="noreferrer">GitHub</a>)  
               </div>
             </div>
           </div>
-          </a>
+          </div>
           <div className="rounded-sm bg-[#fff]/30 text-left font-bold h-[60px] mt-4">
             <span className="float-left align-middle mt-1 ml-1">
             {/* <AiOutlineSearch size="25px"/> */}
@@ -280,17 +274,15 @@ function MicrosoftResumeTemplate() {
             </span>
             <div className='pt-2'>
               <span className="">
-                {/* {otherProjSplit[0]} */}
-                {/* <br/> */}
-                Bible Book Rating App
+                  {bibleRatingData.name}
               </span>
               <span className='float-right mr-2 mt-3'>
                 <AiOutlineCaretRight size="25px"/>
               </span>
               <div className='text-xs'>
-                (<a href='https://bible-book-rating-app.surge.sh/' className='underline text-sky-300'>Demo</a>) 
+                (<a href={bibleRatingData.link} className='hover:underline text-sky-300' target="_blank" rel="noreferrer">Demo</a>) 
                 - 
-                (<a href='https://github.com/AJMikalauskas/rate-anything-app' className='underline text-sky-300'>GitHub</a>)  
+                (<a href={bibleRatingData.github} className='hover:underline text-sky-300' target="_blank" rel="noreferrer">GitHub</a>)  
               </div>
 
             </div>
@@ -310,24 +302,29 @@ function MicrosoftResumeTemplate() {
         </div> */}
       </div>     
         <div className='absolute bottom-0 bg-[#000]/60 w-full overflow-hidden h-[5%] flex py-1 justify-evenly'>
-          <img src={windows11Icon} alt="windows-11-icon" width="35px" className='items-center flex hover:bg-white/40 rounded-md'/>
-          <AiOutlineSearch size="35px" className='text-white items-center flex'/>
+          <div onClick={handleNavToHome} className="hover:cursor-pointer">
+            <img src={windows11Icon} alt="windows-11-icon" width="35px" className='items-center flex hover:bg-white/40 rounded-md'/>
+          </div>
+
+          <AiOutlineSearch size="35px" className='text-white items-center flex hover:bg-white/40 rounded-md'/>
           {/* Make it to where it looks like zoom out of all 3 resumes? */}
-          {/* <img src={taskViewIcon} alt="task-view-icon" width="35px" className='items-center flex hover:bg-white/40 rounded-md'/>  */}
+          <img src={taskViewIcon} alt="task-view-icon" width="35px" className='items-center flex hover:bg-white/40 rounded-md'/> 
+
           {/* Link To Resume? */}
           <img src={fileExplorerIcon} alt="file-explorer-icon" width="35px" className='items-center flex hover:bg-white/40 rounded-md'/> 
+
           {/* Link To Way To Mail Me? */}
           <img src={mailIcon} alt="mail-icon" width="35px" className='items-center flex hover:bg-white/40 rounded-md'/>
           {/* Call/Phone how to do? */}
           <img src={phoneIcon} alt="phone-icon" width="35px" className='items-center flex hover:bg-white/40 rounded-md'/>  
-            <a href='https://www.linkedin.com/in/alexander-mikalauskas/'>
+            <a href='https://www.linkedin.com/in/alexander-mikalauskas/' target="_blank" rel="noreferrer">
                 <img src={linkedInIcon} alt="linked-in-icon" width="35px" className='items-center flex hover:bg-white/40 rounded-md'/>  
             </a>
-            <a href='https://github.com/AJMikalauskas'>
+            <a href='https://github.com/AJMikalauskas' target="_blank" rel="noreferrer">
                 <img src={githubIcon} alt="github-icon" width="35px" className='items-center flex hover:bg-white/40 rounded-md'/>  
             </a>
             {/* Link To Something like a links page?*/}
-          <img src={settingsIcon} alt="settings-icon" width="35px" className='items-center flex hover:bg-white/40 rounded-md'/>  
+          {/* <img src={settingsIcon} alt="settings-icon" width="35px" className='items-center flex hover:bg-white/40 rounded-md'/>   */}
         </div>
     </div>
     {/* <div className="w-[15%] h-[10%] mt-[40%] pl-24">

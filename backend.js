@@ -81,6 +81,7 @@ app.post('/test', async(req,res) => {
             email_address : email,
             status: 'subscribed'
         }
+        // Need to put these in .env file
         const listId = '5e5ffaae31';
         const apiKey = 'ff16a84ee287677a6eebe3bf2c347da1-us14';
         const response = await axios.post(`https://us14.api.mailchimp.com/3.0/lists/${listId}/members`, payload,

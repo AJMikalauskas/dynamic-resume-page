@@ -40,10 +40,18 @@ const MicrosoftTemplate = React.lazy(() => import("./components/MicrosoftResumeT
 const GoogleTemplate = React.lazy(() => import("./components/GoogleResumeTemplate"));
 const FacebookTemplate = React.lazy(() => import("./components/FacebookTemplate"));
 
+
+// Main Project Pages
+const CryptoAppProj = React.lazy(() => import("./components/CryptoApp"));
+const DappProj = React.lazy(() => import("./components/FacebookTemplate"));
+
+// Missing 404 Page
+const Missing404 = React.lazy(() => import("./components/Missing404"));
+
 function App() {
 
   return (
-    <div className="bg-gray-500">
+    <div className="bg-black/20">
     <Suspense
       fallback={
         <div className="">
@@ -54,17 +62,23 @@ function App() {
       <Routes>
         <Route path="/" element={
     <div className="h-screen p-9">
-      <p>Test Intro</p>
-      <div className="mt-[100px] mx-[5%] justify-evenly flex h-[400px]">
-        <Link to="/microsoft" className="hover:scale-125 text-center text-white" style={{transition: "transform .5s"}}>
+      <div className="text-black text-center">
+        <p className="text-2xl font-bold mb-2">Hi, I'm Alexander</p>
+        <p>Welcome To My Dynamic Resumes Page. In case you don't know who I am, I'm a Junior Full Stack Developer with<br/>
+        my main focuses being React and C#. What My Resume Templates don't show, is my knowledge in data structures and algorithms,<br/>
+        my mentor which is my Dad, a 30 year senior software engineer, and the hundreds of stack overflow articles I searched while building this.
+        </p>
+      </div>
+      <div className="mt-[50px] mx-[5%] justify-evenly flex h-[400px] font-semibold">
+        <Link to="/microsoft" className="hover:scale-125 text-center" style={{transition: "transform .5s"}}>
           <div>Microsoft</div>
           <img src={microsoftTemplateSmall} alt="microsoft-template-small" className=" w-[200px] items-center flex h-full" />
         </Link>
-        <Link to="/google" className="hover:scale-125 text-center text-white" style={{transition: "transform .5s"}}>
+        <Link to="/google" className="hover:scale-125 text-center" style={{transition: "transform .5s"}}>
           <div>Google</div>
           <img src={googleTemplateSmall} alt="google-template-small" className="items-center flex h-full" style={{transition: "transform .5s"}}/>
         </Link>
-        <Link to="/facebook" className="hover:scale-125 text-center text-white" style={{transition: "transform .5s"}}>
+        <Link to="/facebook" className="hover:scale-125 text-center" style={{transition: "transform .5s"}}>
           <div>Facebook</div>
           <img src={facebookTemplateSmall} alt="facebook-template-small" className="h-full items-center flex" style={{transition: "transform .5s"}}/>
         </Link>
@@ -78,9 +92,11 @@ function App() {
     </div>
         } >
         </Route>
-        <Route path="google" element={<GoogleTemplate/>}/>
-        <Route path="microsoft" element={<MicrosoftTemplate/>}/>
+          <Route path="microsoft" element={<MicrosoftTemplate/>}/>
+          <Route path="google" element={<GoogleTemplate/>}/>
           <Route path="facebook" element={<FacebookTemplate/>}/>
+          <Route path="crypto-app" element={<CryptoAppProj/>}/>
+          <Route path="*" element={<Missing404/>}/>
     </Routes>
     </Suspense>
     </div>

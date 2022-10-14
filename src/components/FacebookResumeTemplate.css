@@ -1,0 +1,4 @@
+/* Remove Scrollbar but keep functionality --> https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_hide_scrollbar_keep_func  */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}

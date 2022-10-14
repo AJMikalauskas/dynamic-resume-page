@@ -5,13 +5,17 @@
             "name": "Decentralized Token Exchange App",
             "timestamp": "(Apr 2022 - Jul 2022)",
             "explanationBulletPoints": "Web application that enables users to buy or sell a custom ERC-20 token in exchange of Ethereum; Requires Ropsten ETH and a Metamask Account. Allows users to deposit tokens or Ethereum from their wallet onto the Exchange; Can also withdraw from the Exchange back to the wallet. Created Token and Exchange Smart Contracts using Solidity. Implemented TDD to assure correct functionality among smart contract methods. Deployed Smart Contracts to the Ropsten Test Network using Truffle",
-            "techStack": "React.js, Redux, Solidity, TDD, Truffle, Ganache, CSS modules, HTML"
+            "techStack": "React.js, Redux, Solidity, TDD, Truffle, Ganache, CSS modules, HTML",
+            "link": "https://dapp-exchange.surge.sh/",
+            "github": "https://github.com/AJMikalauskas/Decentralized-Token-Exchange-App/tree/completed-deployContracts-section"
         },
         {
             "name": "Crypto Login Authentication App",
             "timestamp": "(Jul 2021 - Present)",
             "explanationBulletPoints": "Web application that enables users to add crypto coins from a table to their watchlist with a fully functioning login system verified using JWTs. Implemented the entire login system to allow CRUD Operations on the user list and user validation. Designed and created a fully responsive home page with a table, chart, and a search system using the Coin Gecko API & deployed using Netlify. Designed API Controllers on the Backend & deployed using Heroku",
-            "techStack": "React.js, Asynchronous API(async/await), Hooks(State/Effect), MongoDB, Express, Axios, Custom Hooks & REST API"
+            "techStack": "React.js, Asynchronous API(async/await), Hooks(State/Effect), MongoDB, Express, Axios, Custom Hooks & REST API",
+            "link": "https://crypto-app-demo.netlify.app/loggedOutHome",
+            "github" : "https://github.com/AJMikalauskas/full-stack-crypto-app/tree/near-final-version"
         }
     ],
     "Education": "High School Degree, Flower Mound High School. Graduated December 2021",
@@ -38,5 +42,18 @@
             "Able to take both responsibility and criticism"
         ]
     },
-    "OtherProjects": "High School Degree, Flower Mound High School. Graduated December 2021"
+    "OtherProjects": {
+        "Rate App": {
+            "name": "Bible Book Rating App",
+            "link": "https://bible-book-rating-app.surge.sh/",
+            "github": "https://github.com/AJMikalauskas/rate-anything-app",
+            "description": "Web App That Allows you To Rate Bible Books with emojis changing based on the rating."
+        },
+        "Google Maps App": {
+            "name": "Google Maps Filtering App",
+            "link": "https://google-maps-filter.surge.sh/",
+            "github": "https://github.com/AJMikalauskas/google-maps-travel-advisor",
+            "description": "Web App That Finds Restauraunts, Hotels, and Attractions closest to where you are or where the center point of the map is."
+        }
+    }
 }

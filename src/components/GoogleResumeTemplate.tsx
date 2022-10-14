@@ -31,6 +31,9 @@ import smallLinkedinPhoto from "../img/linkedin-circular-photo.png";
 import defaultImageIcon from "../img/mountain-image-icon.png";
 import mapPinIcon from "../img/map-pin-icon.png";
 import newsIcon from "../img/news-icon.png";
+import bibleIcon from "../img/bible-icon.png"
+import googleMapsIcon from "../img/google-maps-icon.png";
+import {useNavigate} from 'react-router-dom';
 //import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
 
 // const socialIcons: {icon: JSX.Element, url: string}[] = [
@@ -46,12 +49,18 @@ function GoogleResumeTemplate() {
   // const [frontendSkillsShowing, setFrontendSkillsShowing] = useState(true);
   // const [backendSkillsShowing, setBackendSkillsShowing] = useState(true);
   // OtherProjects, Education
-  const { name, Projects, Skills } = dummyData;
+  const { name, Projects, Skills, OtherProjects } = dummyData;
 
   const project1BulletPoints = Projects[0].explanationBulletPoints.split(".");
   const project2BulletPoints = Projects[1].explanationBulletPoints.split(".");
-  // const educationSplit = Education.split(".");
-  // const otherProjSplit = OtherProjects.split(".");
+  let navigate = useNavigate();
+  function handleNavToHome(e: any) {
+    e.preventDefault();
+    navigate('/');
+  }
+
+  const googleMapsData = OtherProjects['Google Maps App'];
+  const bibleRatingData = OtherProjects['Rate App'];
 
   return (
     <div className="max-w-[1000px] flex m-auto p-9 justify-center w-full h-full ">
@@ -60,13 +69,14 @@ function GoogleResumeTemplate() {
                 <BsFillArrowLeftCircleFill size="50px" className=" rounded-[50%] border-1 border-blue-500" />
             </a>
         </div> */}
-      <div className="rounded-md mx-auto border-2 h-[93vh] w-[63%] text-black p-2 float-left bg-white">
+      <div className="rounded-md mx-auto border-2 h-[92vh] w-[63%] text-black p-2 float-left bg-white">
         <div className="w-full h-[17%] relative">
           <div className="">
             <img
+              onClick={handleNavToHome}
               src={googleLogo}
               alt="google-logo"
-              className="w-[20%] h-[30%] inline-block"
+              className="w-[20%] h-[30%] inline-block hover:cursor-pointer"
             />
             <p className="rounded-md bg-[#fff] text-black shadow  shadow-black/30 drop-shadow-xl inline-block mx-4 pl-4 w-[60%]">
               {name}
@@ -161,42 +171,18 @@ function GoogleResumeTemplate() {
           <div className="">
             {/* Create a */}
             <div className="">
-                <a href="https://dapp-exchange.surge.sh/" >
+                <a href={Projects[1].link} target="_blank" rel="noreferrer" >
               <div className="flex">
                 <p className="text-sm font-semibold">Project</p>
                 <p
                   className="ml-2"
-                  style={{ fontSize: "9px", lineHeight: "1.25rem" }}
+                  style={{ fontSize: "9px", lineHeight: "1.25rem", paddingTop: "1.5px"}}
                 >
-                  https://dapp-exchange.surge.sh/ 
+                  {Projects[1].link}
                 </p>
               </div>
               <p className="text-sky-700 font-semibold text-sm hover:underline">
-                Decentralized Token Exchange App | (Apr 2022 - Jul 2022)
-              </p>
-              </a>
-              <p className="text-xs" style={{ fontSize: "10px" }}>
-                <ul>
-                  {project1BulletPoints.map((bp, idx) => (
-                    <li key={idx}> {bp} </li>
-                  ))}
-                </ul>
-              </p>
-            </div>
-            <div className="mt-6">
-            <a href="https://crypto-app-demo.netlify.app/loggedOutHome">
-              <div className="flex">
-                <p className="text-sm font-semibold">Project 2</p>
-                <p
-                  className="ml-2"
-                  style={{ fontSize: "9px", lineHeight: "1.25rem" }}
-                >
-                  {" "}
-                  www.linktowebsite.com{" "}
-                </p>
-              </div>
-              <p className="text-sky-700 font-semibold text-sm hover:underline">
-                Crypto Login Authentication App | (Jul 2021 - Present)
+                {Projects[1].name} | {Projects[1].timestamp}
               </p>
               </a>
               <p className="text-xs" style={{ fontSize: "10px" }}>
@@ -208,24 +194,37 @@ function GoogleResumeTemplate() {
               </p>
             </div>
             <div className="mt-6">
-                {/* Link to what? Photo of My High School Degree? */}
-                <a href="/">
+              {/* "https://dapp-exchange.surge.sh/" */}
+            <a href={Projects[0].link} target="_blank" rel="noreferrer">
               <div className="flex">
-                <p className="text-sm font-semibold">Education</p>
-                {/*  Leave link to flowermound website? */}
+                <p className="text-sm font-semibold">Project 2</p>
                 <p
-                  className="ml-2"
-                  style={{ fontSize: "9px", lineHeight: "1.25rem" }}
+                  className="ml-2 pt-0.25"
+                  style={{ fontSize: "9px", lineHeight: "1.25rem", paddingTop: "1.5px" }}
                 >
-                  {" "}
-                  www.linktowebsite.com{" "}
+                  {Projects[0].link}
                 </p>
               </div>
               <p className="text-sky-700 font-semibold text-sm hover:underline">
-                Flower Mound High School | (Aug 2018 -
-                December 2021)
+                {Projects[0].name} | {Projects[0].timestamp}
               </p>
               </a>
+              <p className="text-xs" style={{ fontSize: "10px" }}>
+                <ul>
+                  {project1BulletPoints.map((bp, idx) => (
+                    <li key={idx}> {bp} </li>
+                  ))}
+                </ul>
+              </p>
+            </div>
+            <div className="mt-6">
+                {/* Link to what? Photo of My High School Degree? */}
+              <div className="flex">
+                <p className="text-sm font-semibold">Education</p>
+              </div>
+              <p className="text-sky-700 font-semibold text-sm">
+                Flower Mound High School |  High School Degree
+              </p>
               <p className="text-xs" style={{ fontSize: "10px" }}>
                 <ul>
                   <li>
@@ -272,13 +271,37 @@ function GoogleResumeTemplate() {
                 >
                   <div className="accordion-body py-2 px-2 text-sm">
                     <ul>
-                      <li>
-                        <strong>Google Maps Filtering App</strong> This is dummy
-                        text and a minor description
+                      <li className="pb-4">
+                        <div className="flex">
+                          <span className="float-left align-middle">
+                            <img alt="googleMapsIcon" src={googleMapsIcon} width="30px" className='rounded-lg'/>
+                          </span>
+                          <p className="pt-1"><strong>{googleMapsData.name}</strong></p>
+                          <div className="text-xs pt-1.5 pl-2 ">
+                            (<span className="text-sky-700 hover:underline cursor-pointer font-semibold"><a href={googleMapsData.link}>Demo</a></span>) 
+                             <span> - </span> 
+                            (<span className="text-sky-700 hover:underline cursor-pointer font-semibold"><a href={googleMapsData.github}>GitHub</a></span>)
+                          </div>
+                        </div>
+                        <p className="text-xs">
+                          {googleMapsData.description}
+                        </p>
                       </li>
                       <li>
-                        <strong>Bible Book Rating App</strong> This is dummy
-                        text and a minor description
+                        <div className="flex">
+                          <span className="float-left align-middle">
+                            <img alt="googleMapsIcon" src={bibleIcon} width="30px" className='rounded-lg'/>
+                          </span>
+                          <p className="pt-1"><strong>{bibleRatingData.name}</strong> </p>
+                          <div className="text-xs pt-1.5 pl-2 ">
+                            (<span className="text-sky-700 hover:underline cursor-pointer font-semibold"><a href={bibleRatingData.link}>Demo</a></span>) 
+                             <span> - </span> 
+                            (<span className="text-sky-700 hover:underline cursor-pointer font-semibold"><a href={bibleRatingData.github}>GitHub</a></span>)
+                          </div>
+                        </div>
+                        <p className="text-xs">
+                          {bibleRatingData.description}
+                        </p>
                       </li>
                     </ul>
                   </div>
