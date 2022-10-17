@@ -71,7 +71,7 @@ function FacebookResumeTemplate() {
                 <BsFillArrowLeftCircleFill size="50px" className=" rounded-[50%] border-1 border-blue-500" />
             </a>
         </div> */}
-      <div className="rounded-md mx-auto border-2 h-[92vh] w-[63%] text-black p-2 bg-[#f1f2f6]">
+      <div className="rounded-md mx-auto border-2 h-[92.25vh] w-[63%] text-black p-2 bg-[#f1f2f6]">
         <div className="w-full h-[7%] relative">
           <div className="">
             <div className="hover:cursor-pointer" onClick={handleNavToHome}>

@@ -60,8 +60,8 @@ function MicrosoftResumeTemplate() {
                 <BsFillArrowLeftCircleFill size="50px" className=" rounded-[50%] border-1 border-blue-500" />
             </a>
         </div> */}
-      <div className="rounded-md justify-center mx-auto bg-no-repeat bg-cover bg-center custom-img relative h-[92vh] w-[50%]">
-        <div className="rounded-md bg-[#000]/50 mb-[12.5%] p-4 text-white relative max-h-[85vh] overflow-y-scroll hide-scrollbar">
+      <div className="rounded-md justify-center mx-auto bg-no-repeat bg-cover bg-center custom-img relative h-[92.25vh] w-[50%]">
+        <div className="rounded-md bg-[#000]/50 p-4 text-white relative max-h-[85vh] overflow-y-scroll hide-scrollbar">
           <div className="rounded-md bg-[#fff]/50 h-8 text-center">
             <span className="float-left align-middle mt-1 pl-1">
             <AiOutlineSearch size="25px"/>
@@ -139,8 +139,8 @@ function MicrosoftResumeTemplate() {
                     (<a href={Projects[0].link} className='text-sky-300 hover:underline' target="_blank" rel="noreferrer">Demo</a>)
                     - 
                     (<a href={Projects[0].github} className="text-sky-300 hover:underline" target="_blank" rel="noreferrer">GitHub</a>)
-                    -
-                    (<Link to="/crypto-app" className='text-sky-300 hover:underline'>Description</Link>)
+                    {/* - */}
+                    {/* (<Link to="/crypto-app" className='text-sky-300 hover:underline'>Description</Link>) */}
                   </span>
 
                   <span className='float-right mr-10'>
@@ -200,10 +200,10 @@ function MicrosoftResumeTemplate() {
                   }
                 </span>
             </div>
-            <div className={`rounded-sm bg-[#fff]/30 text-center p-3 ${frontendSkillsShowing ? '' : 'hidden'}`}>
-                <ul className='text-left'>
+            <div className={`rounded-sm text-center ${!frontendSkillsShowing && 'hidden'}`}>
+                <ul className='text-left dropdown-menu-1 '>
                     {Skills['Frontend Development'].map((skill, idx) => (
-                        <li key={idx}>{skill}</li>
+                        <li key={idx} className={`list-item-${idx} bg-[#fff]/30 px-2`}>{skill}</li>
                     ))}
                   {/* <li>React.js</li>
                   <li>Angular</li>
@@ -226,10 +226,10 @@ function MicrosoftResumeTemplate() {
                   }
                 </span>
             </div>
-            <div className={`rounded-sm bg-[#fff]/30 text-center p-3 ${backendSkillsShowing ? '' : 'hidden'}`}>
-            <ul className='text-left'>
+            <div className={`rounded-sm ${!backendSkillsShowing && 'hidden'}`}>
+            <ul className='text-left dropdown-menu-2'>
                 {Skills['Backend Development'].map((skill, idx) => (
-                        <li key={idx}>{skill}</li>
+                        <li key={idx} className="bg-[#fff]/30 px-2">{skill}</li>
                 ))}
                   {/* <li>C#</li>
                   <li>ASP.NET</li>
