@@ -70,7 +70,7 @@ const NewsletterSubscribe = () => {
     }
 
     return (
-        <div className='flex flex-col items-center w-full p-6 border-black border-solid border rounded-sm mt-[8%] text-black'>
+        <div className='flex flex-col items-center w-full p-6 border-black border-solid border rounded-sm mt-[8%] text-white'>
             <div className='text-3xl font-bold text-center '>
                 Subscribe To My Newsletter!
             </div>

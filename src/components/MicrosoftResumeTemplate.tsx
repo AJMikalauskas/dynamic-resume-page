@@ -44,7 +44,7 @@ function MicrosoftResumeTemplate() {
   let navigate = useNavigate();
   function handleNavToHome(e: any) {
     e.preventDefault();
-    navigate(-1);
+    navigate('/');
   }
 
   const googleMapsData = OtherProjects['Google Maps App'];
@@ -60,7 +60,7 @@ function MicrosoftResumeTemplate() {
                 <BsFillArrowLeftCircleFill size="50px" className=" rounded-[50%] border-1 border-blue-500" />
             </a>
         </div> */}
-      <div className="rounded-md justify-center mx-auto bg-no-repeat bg-cover bg-center custom-img relative h-[92.25vh] w-[50%]">
+      <div className="rounded-md justify-center mx-auto bg-no-repeat bg-cover bg-center custom-img relative h-[92.25vh] w-[63%]">
         <div className="rounded-md bg-[#000]/50 p-4 text-white relative max-h-[85vh] overflow-y-scroll hide-scrollbar">
           <div className="rounded-md bg-[#fff]/50 h-8 text-center">
             <span className="float-left align-middle mt-1 pl-1">
@@ -139,8 +139,7 @@ function MicrosoftResumeTemplate() {
                     (<a href={Projects[0].link} className='text-sky-300 hover:underline' target="_blank" rel="noreferrer">Demo</a>)
                     - 
                     (<a href={Projects[0].github} className="text-sky-300 hover:underline" target="_blank" rel="noreferrer">GitHub</a>)
-                    {/* - */}
-                    {/* (<Link to="/crypto-app" className='text-sky-300 hover:underline'>Description</Link>) */}
+                    - (<Link to="/crypto-app" className='text-sky-300 hover:underline'>Description</Link>)
                   </span>
 
                   <span className='float-right mr-10'>

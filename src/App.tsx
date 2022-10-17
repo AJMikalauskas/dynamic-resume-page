@@ -51,7 +51,17 @@ const Missing404 = React.lazy(() => import("./components/Missing404"));
 function App() {
 
   return (
-    <div className="bg-black/20">
+    <div className="h-screen w-full text-white">
+        <div className="w-full">
+        <ul className="box bg bg-gradient-to-r from-[#159957] to-[#155799]">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
     <Suspense
       fallback={
         <div className="">
@@ -61,12 +71,27 @@ function App() {
     >
       <Routes>
         <Route path="/" element={
+          // h-screen p-9
     <div className="h-screen p-9">
-      <div className="text-black text-center">
+      {/* text-black */}
+      {/* <div className="w-full">
+        <ul className="box bg bg-gradient-to-r from-[#159957] to-[#155799]">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div> */}
+      <div className="text-center">
         <p className="text-2xl font-bold mb-2">Hi, I'm Alexander</p>
-        <p>Welcome To My Dynamic Resumes Page. In case you don't know who I am, I'm a Junior Full Stack Developer with<br/>
-        my main focuses being React and C#. What My Resume Templates don't show, is my knowledge in data structures and algorithms,<br/>
-        my mentor which is my Dad, a 30 year senior software engineer, and the hundreds of stack overflow articles I searched while building this.
+        <p>Thanks For Visiting My Dynamic Resumes Page! In case you don't know who I am, I'm a Junior Full Stack Developer with<br/>
+        my main focuses being React and C#. 
+        {/* I've been playing with computers since I was 11 when I learned Graphic Design with Photoshop and have since learned how to make
+        mini movies with imovie, youtube videos with lightworks, and coding with html, css, javascript, and more. */}
+        {/* What My Resume Templates don't show, is my knowledge in data structures and algorithms,<br/>
+        my mentor which is my Dad, a 30 year senior software engineer, and the hundreds of stack overflow articles I searched while building this. */}
         </p>
       </div>
       <div className="mt-[50px] mx-[5%] justify-evenly flex h-[400px] font-semibold">

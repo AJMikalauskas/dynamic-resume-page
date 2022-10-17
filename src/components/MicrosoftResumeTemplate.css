@@ -15,27 +15,27 @@
 
 .dropdown-menu-1 li:nth-child(1){
     padding-top: 10px;
-    animation: animate 300ms ease-in-out forwards;
+    animation: animation2 300ms ease-in-out forwards;
     animation-delay: -150ms;
 }
 
 .dropdown-menu-1 li:nth-child(2){
-    animation: animate 300ms ease-in-out forwards;
+    animation: animation2 300ms ease-in-out forwards;
     animation-delay: 0ms;
 }
 
 .dropdown-menu-1 li:nth-child(3){
-    animation: animate 300ms ease-in-out forwards;
+    animation: animation2 300ms ease-in-out forwards;
     animation-delay: 150ms;
 }
 
 .dropdown-menu-1 li:nth-child(4){
-    animation: animate 300ms ease-in-out forwards;
+    animation: animation2 300ms ease-in-out forwards;
     animation-delay: 300ms;
 }
 
 .dropdown-menu-1 li:nth-child(5){
-    animation: animate 300ms ease-in-out forwards;
+    animation: animation2 300ms ease-in-out forwards;
     animation-delay: 450ms;
     padding-bottom: 10px;
 }
@@ -44,13 +44,13 @@
 /* Backend Development */
 
  /* .dropdown-menu-2 .list-item-0-showing{
-    animation: animate 300ms ease-in-out forwards;
+    animation: animation2 300ms ease-in-out forwards;
     animation-delay: -150ms;
     padding-top: 10px;
 }
 
 .dropdown-menu-2 .list-item-1-showing{
-    animation: animate 300ms ease-in-out forwards;
+    animation: animation2 300ms ease-in-out forwards;
     animation-delay: 0ms;
 } */
 
@@ -60,62 +60,62 @@
 }
 
 .dropdown-menu-2 li:nth-child(1){
-    animation: animate 300ms ease-in-out forwards;
+    animation: animation2 300ms ease-in-out forwards;
     animation-delay: -150ms;
     padding-top: 10px;
 }
 
 .dropdown-menu-2 li:nth-child(2){
-    animation: animate 300ms ease-in-out forwards;
+    animation: animation2 300ms ease-in-out forwards;
     animation-delay: 0ms;
 } 
  
  
 .dropdown-menu-2 li:nth-child(3){
-    animation: animate 300ms ease-in-out forwards;
+    animation: animation2 300ms ease-in-out forwards;
     animation-delay: 150ms;
 } 
 
 .dropdown-menu-2 li:nth-child(4){
-    animation: animate 300ms ease-in-out forwards;
+    animation: animation2 300ms ease-in-out forwards;
     animation-delay: 300ms;
 } 
 
 .dropdown-menu-2 li:nth-child(5){
-    animation: animate 300ms ease-in-out forwards;
+    animation: animation2 300ms ease-in-out forwards;
     animation-delay: 450ms;
     padding-bottom: 10px;
 } 
 /* 
  .dropdown-menu-2 .list-item-0-notshowing{
-    animation: animateBack 300ms ease-out forwards;
+    animation: animation2Back 300ms ease-out forwards;
     animation-delay: 450ms;
     padding-top: 10px;
 }
 
  .dropdown-menu-2 .list-item-1-notshowing{
-    animation: animateBack 300ms ease-out forwards;
+    animation: animation2Back 300ms ease-out forwards;
     animation-delay: 300ms;
 }
 
 .dropdown-menu-2 .list-item-2-notshowing{
-    animation: animateBack 300ms ease-out forwards;
+    animation: animation2Back 300ms ease-out forwards;
     animation-delay: 150ms;
 }  
 
 
 .dropdown-menu-2 .list-item-3-notshowing{
-    animation: animateBack 300ms ease-out forwards;
+    animation: animation2Back 300ms ease-out forwards;
     animation-delay: 0ms;
 }
 
 .dropdown-menu-2 .list-item-4-notshowing{
-    animation: animateBack 300ms ease-out forwards;
+    animation: animation2Back 300ms ease-out forwards;
     animation-delay: -200ms;
     padding-bottom: 10px;
 } */
 
-/* @keyframes animateBack{
+/* @keyframes animation2Back{
     0%{
         opacity:1;
         transform: rotateX(0deg)
@@ -130,7 +130,7 @@
 } */
 
 
-@keyframes animate{
+@keyframes animation2{
     0%{
         opacity:0;
         transform: rotateX(-90deg)
