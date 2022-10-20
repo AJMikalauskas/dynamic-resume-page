@@ -35,7 +35,9 @@
   "scripts": {
     "start:api": "nodemon backend",
     "start:frontend": "react-scripts start",
-    "build": "npm run build:api && npm run build:app",
+    "build:api": "nodemon backend",
+    "build:frontend": "react-scripts start",
+    "build": "npm run build:api && npm run build:frontend",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
