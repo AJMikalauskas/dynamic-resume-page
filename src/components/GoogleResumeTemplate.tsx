@@ -94,7 +94,7 @@ function GoogleResumeTemplate() {
   async function pushTestReq() {
     setIsLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/retrieveAllData");
+      const res = await axios.get("https://dynamic-resume-backend.herokuapp.com/retrieveAllData");
       console.log(res.data);
       console.log("successful in adding to database");
       // const { otherProjects, projects, singleFields, skills} = res.data;

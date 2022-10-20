@@ -60,7 +60,7 @@ const NewsletterSubscribe = () => {
         setErrorMsg(null);
 
         try {
-            const response = await axios.post("http://localhost:5000/addSubscriber", { email });
+            const response = await axios.post("https://dynamic-resume-backend.herokuapp.com/addSubscriber", { email });
             const data = await response.data;
             setStatus(response.status);
             setState(data.msg)
