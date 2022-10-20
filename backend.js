@@ -21,7 +21,7 @@ app.use(express.json());
 
 // Use env.PORT  if not on a local server, if on local server, use port 5000
 // process.env.PORT
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Static folder
 // app.use(express.static(path.join(__dirname, 'public')))
