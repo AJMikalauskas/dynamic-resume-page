@@ -1,4 +1,6 @@
+require('dotenv').config();
 const express = require('express');
+const app = express();
 //const request = require('request');
 //const bodyParser = require('body-parser');
 //const path = require('path');
@@ -11,13 +13,11 @@ const Projects = require('./models/Project.model');
 const OtherProjects = require('./models/OtherProjects.model');
 const Skills = require('./models/Skills.model');
 const SingleFields = require('./models/SingleFields.model');
+const credentials = require('./config/credentials');
 
-
-require('dotenv').config();
-
-const app = express();
-app.use(express.json());
+app.use(credentials);
 app.use(cors(corsOptions));
+app.use(express.json());
 
 // Use env.PORT  if not on a local server, if on local server, use port 5000
 // process.env.PORT
