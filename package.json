@@ -4,7 +4,6 @@
   "description": "backend for dynamic resume",
   "main": "backend.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon backend.js",
     "dev": "nodemon backend"
   },
