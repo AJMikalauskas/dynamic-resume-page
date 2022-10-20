@@ -87,7 +87,7 @@ function App() {
       <Routes>
         <Route path="/" element={
           // h-screen p-9
-    <div className=" p-9 ">
+    <div className="p-9">
       {/* <div className="w-full h-full">
         <ul className="box">
           <li></li>

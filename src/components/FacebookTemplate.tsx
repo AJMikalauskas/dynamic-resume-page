@@ -39,7 +39,7 @@ import homeIcon from "../img/home-icon.png"
 import windows11Icon from "../img/windows-11-icon.png";
 import {useNavigate} from 'react-router-dom';
 //import Modal from "./Modal";
-import axios from 'axios';
+import axios from './api/axios';
 // import defaultImageIcon from "../img/mountain-image-icon.png";
 // import mapPinIcon from "../img/map-pin-icon.png";
 // import newsIcon from "../img/news-icon.png";
@@ -90,7 +90,7 @@ function FacebookResumeTemplate() {
   async function pushTestReq() {
     setIsLoading(true);
     try {
-      const res = await axios.get("https://dynamic-resume-backend.herokuapp.com/retrieveAllData");
+      const res = await axios.get("/retrieveAllData");      
       console.log(res.data);
       console.log("successful in adding to database");
       // const { otherProjects, projects, singleFields, skills} = res.data;
@@ -139,7 +139,7 @@ useEffect(() => {
   return (
     <>
     {!isLoading &&
-    <div className="max-w-[1000px] m-auto p-9 justify-center w-full h-full relative z-10">
+    <div className="max-w-[1000px] m-auto p-9 justify-center w-full h-screen relative z-10">
         {/* <div className="float-left w-[15%] h-[10%] mt-[40%]">
             <a className="hover:cursor-pointer">
                 <BsFillArrowLeftCircleFill size="50px" className=" rounded-[50%] border-1 border-blue-500" />

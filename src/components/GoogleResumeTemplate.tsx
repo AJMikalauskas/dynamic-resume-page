@@ -37,7 +37,7 @@ import facebookLogo from "../img/facebook-logo-icon.png";
 import homeIcon from "../img/home-icon.png"
 import {useNavigate} from 'react-router-dom';
 //import Modal from './Modal';
-import axios from 'axios';
+import axios from './api/axios';
 //import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
 
 // const socialIcons: {icon: JSX.Element, url: string}[] = [
@@ -94,7 +94,7 @@ function GoogleResumeTemplate() {
   async function pushTestReq() {
     setIsLoading(true);
     try {
-      const res = await axios.get("https://dynamic-resume-backend.herokuapp.com/retrieveAllData");
+      const res = await axios.get("/retrieveAllData");
       console.log(res.data);
       console.log("successful in adding to database");
       // const { otherProjects, projects, singleFields, skills} = res.data;
@@ -152,7 +152,7 @@ useEffect(() => {
   return (
     <>
     {!isLoading &&
-    <div className="max-w-[1000px] m-auto p-9 justify-center w-full h-full relative z-10">
+    <div className="max-w-[1000px] m-auto p-9 justify-center w-full h-screen relative z-10">
         <div className='float-left p-2 text-sm bg-white/40 rounded-lg mt-[40%] hover:cursor-pointer hover:bg-white/70' onClick={(event) => {handleNavToHome(event,"")}}>
           <img src={homeIcon} alt="home-icon" width="50px" className=''/>
         </div>
