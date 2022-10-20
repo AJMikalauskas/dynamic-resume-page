@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import axios from "axios";
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
-import Label from "./Label";
+//import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
+//import Label from "./Label";
 //Schema creation and usage using yup package.
 // import * as Yup from 'yup';
 
@@ -54,12 +54,13 @@ const NewsletterSubscribe = () => {
     const [status, setStatus] = useState(0);
     const [errorMsg, setErrorMsg] = useState(null);
 
-    const subscribe = async() => {
+    const subscribe = async(e: any) => {
+        e.preventDefault();
         setState("LOADING");
         setErrorMsg(null);
 
         try {
-            const response = await axios.post("http://localhost:5000/test", { email });
+            const response = await axios.post("http://localhost:5000/addSubscriber", { email });
             const data = await response.data;
             setStatus(response.status);
             setState(data.msg)
@@ -70,14 +71,14 @@ const NewsletterSubscribe = () => {
     }
 
     return (
-        <div className='flex flex-col items-center w-full p-6 border-black border-solid border rounded-sm mt-[8%] text-white'>
+        <div className='max-h-[500px] flex flex-col items-center w-full p-6 border-white border-solid border rounded-sm mt-[5%] text-white z-10 relative'>
             <div className='text-3xl font-bold text-center '>
                 Subscribe To My Newsletter!
             </div>
             <p className='mt-2 font-light w-4/5 text-center leading-relaxed'> It will be sent out every week with my <u className='font-semibold'>most interesting tech articles and videos</u>, the <u className='font-bold'>top data structure/algorithm concept</u> I'm learning about, and the <u className='font-bold'>course I'm working on.</u></p>
-            <div className='flex w-1/2 justify-center mt-5 flex-col lg:flex-row'>
+            <form onSubmit={subscribe} className='flex w-1/2 justify-center mt-5 flex-col lg:flex-row'>
                 <input
-                    className='appearance-none mb-2 lg:mb-0 w-full lg:w-2/3 border border-gray-500 rounded py-2 px-4 text-md'
+                    className='appearance-none mb-2 lg:mb-0 w-full lg:w-2/3 border border-gray-500 rounded py-2 px-4 text-md text-black'
                     type="text"
                     placeholder="Enter Email"
                     value={email}
@@ -93,9 +94,9 @@ const NewsletterSubscribe = () => {
                 >
                     Subscribe
                 </button>
-            </div>
+            </form>
             {state === "ERROR" && (
-                <div className='bg-red-600 mt-2 text-center w-[25%]'>
+                <div className='bg-red-600 mt-2 text-center w-[25%] p-2'>
                     <p className=' text-white'>{errorMsg}</p>
                 </div>
             )}

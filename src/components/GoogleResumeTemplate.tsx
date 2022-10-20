@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useState, useRef, useEffect, useCallback  } from "react";
 // import "./MicrosoftResumeTemplate.css";
 // import bgImg from "../src/img/microsoft-bg.png";
 // import ethIcon from "../../src/img/eth.png";
@@ -26,14 +26,18 @@ import keyboardIcon from "../img/keyboard-icon.png";
 import googleMicIcon from "../img/google-mic-icon.png";
 //import searchIcon from "../img/search-icon.png";
 import googleSearchIcon from "../img/google-search.png";
-import dummyData from "./DummyData.json";
+//import dummyData from "./DummyData.json";
 import smallLinkedinPhoto from "../img/linkedin-circular-photo.png";
 import defaultImageIcon from "../img/mountain-image-icon.png";
 import mapPinIcon from "../img/map-pin-icon.png";
 import newsIcon from "../img/news-icon.png";
 import bibleIcon from "../img/bible-icon.png"
 import googleMapsIcon from "../img/google-maps-icon.png";
+import facebookLogo from "../img/facebook-logo-icon.png";
+import homeIcon from "../img/home-icon.png"
 import {useNavigate} from 'react-router-dom';
+//import Modal from './Modal';
+import axios from 'axios';
 //import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
 
 // const socialIcons: {icon: JSX.Element, url: string}[] = [
@@ -42,44 +46,130 @@ import {useNavigate} from 'react-router-dom';
 //     url: "./"
 //   }
 // ]
+type skillsType = {
+  id: string, 
+  skillSetName: string,
+  skills: Array<string>,
+  _id: string
+}
 
+type otherProjectsType = {
+  description: string,
+  github: string,
+  id: string,
+  link: string,
+  name: string,
+  _id: string
+}
+
+type projectsType = {
+  explanationBulletPoints: string,
+  github: string,
+  id: string,
+  link: string,
+  name: string,
+  techStack: string,
+  timestamp: string,
+  _id: string
+}
+
+type singleFieldsType = {
+  id: string,
+  text: string,
+  _id: string
+}
+
+type fields = {
+  otherProjects: Array<otherProjectsType>, 
+  projects: Array<projectsType>, 
+  singleFields: Array<singleFieldsType>,
+  skills: Array<skillsType> 
+}
 function GoogleResumeTemplate() {
-  // const [proj1Showing, setProj1Showing] = useState(false);
-  // const [proj2Showing, setProj2Showing] = useState(false);
-  // const [frontendSkillsShowing, setFrontendSkillsShowing] = useState(true);
-  // const [backendSkillsShowing, setBackendSkillsShowing] = useState(true);
-  // OtherProjects, Education
-  const { name, Projects, Skills, OtherProjects } = dummyData;
+  const [isLoading, setIsLoading] = useState(false);
+  //const [personalInfo, setPersonalInfo] = useState<Array<string>>([])
+  const [fillInData,setFillInData] = useState<fields>();
+  const effectRan = useRef(false);
 
-  const project1BulletPoints = Projects[0].explanationBulletPoints.split(".");
-  const project2BulletPoints = Projects[1].explanationBulletPoints.split(".");
+  async function pushTestReq() {
+    setIsLoading(true);
+    try {
+      const res = await axios.get("http://localhost:5000/retrieveAllData");
+      console.log(res.data);
+      console.log("successful in adding to database");
+      // const { otherProjects, projects, singleFields, skills} = res.data;
+      console.log(typeof res.data)
+      const data: fields = res?.data;
+      console.log(fillInData);
+     setFillInData(data);
+     //setPersonalInfo(fillInData.singleFields[2].text.split("."));
+
+     
+    }catch(err) {
+     console.log(err);
+    }
+    setIsLoading(false);
+  } 
+
+useEffect(() => {
+  if(effectRan.current === false) {
+    pushTestReq();
+  
+    return () =>  {
+      console.log('unmounted')
+      effectRan.current = true;
+    }
+}
+
+})
+
+
+//  const { name, Projects, Skills, OtherProjects } = dummyData;
+//  const [isOpen,setIsOpen] = useState(true);
+
+//  const project1BulletPoints = Projects[0].explanationBulletPoints.split(".");
+//  const project2BulletPoints = Projects[1].explanationBulletPoints.split(".");
   let navigate = useNavigate();
-  function handleNavToHome(e: any) {
+  const handleNavToHome = useCallback((e:any, page: string | undefined) => {
     e.preventDefault();
-    navigate('/');
-  }
+    navigate(`/${page && page}`);
+    // Navigate will never change but due to IDE, i'll add it even if unnecessary.
+  }, [navigate]);
 
-  const googleMapsData = OtherProjects['Google Maps App'];
-  const bibleRatingData = OtherProjects['Rate App'];
+  // const googleMapsData = OtherProjects['Google Maps App'];
+  // const bibleRatingData = OtherProjects['Rate App'];
+        // {/* <div className="float-left w-[15%] h-[10%] mt-[40%]">
+        //     <a className="hover:cursor-pointer">
+        //         <BsFillArrowLeftCircleFill size="50px" className=" rounded-[50%] border-1 border-blue-500" />
+        //     </a>
+        // </div> */}
+        // {/* <Modal open={isOpen} onClose={() => setIsOpen(false)} templateName="Google">
+        //   <span className='float-left mr-[5px]'> Click </span>
+        //     <img src={googleLogo} alt="google-logo" width="50px" className='float-left mt-1'/>
+        //    <span className='ml-[5px]'> to go back</span>
+        // </Modal> */}
 
   return (
-    <div className="max-w-[1000px] flex m-auto p-9 justify-center w-full h-full ">
-        {/* <div className="float-left w-[15%] h-[10%] mt-[40%]">
-            <a className="hover:cursor-pointer">
-                <BsFillArrowLeftCircleFill size="50px" className=" rounded-[50%] border-1 border-blue-500" />
-            </a>
-        </div> */}
-      <div className="rounded-md mx-auto border-2 h-[92.25vh] w-[63%] text-black p-2 float-left bg-white">
+    <>
+    {!isLoading &&
+    <div className="max-w-[1000px] m-auto p-9 justify-center w-full h-full relative z-10">
+        <div className='float-left p-2 text-sm bg-white/40 rounded-lg mt-[40%] hover:cursor-pointer hover:bg-white/70' onClick={(event) => {handleNavToHome(event,"")}}>
+          <img src={homeIcon} alt="home-icon" width="50px" className=''/>
+        </div>
+        <div className='float-right p-2 text-sm bg-white/40 rounded-lg mt-[40%] hover:cursor-pointer hover:bg-white/70' onClick={(event) => {handleNavToHome(event,"facebook")}}>
+          <img src={facebookLogo} alt="facebook-logo-icon" width="50px" className=''/>
+        </div>
+      <div className="rounded-md mx-auto border-2 h-[92.25vh] w-[63%] text-black p-2 bg-white">
         <div className="w-full h-[17%] relative">
           <div className="">
             <img
-              onClick={handleNavToHome}
+              onClick={(event) => {handleNavToHome(event,"")}}
               src={googleLogo}
               alt="google-logo"
               className="w-[20%] h-[30%] inline-block hover:cursor-pointer"
             />
             <p className="rounded-md bg-[#fff] text-black shadow  shadow-black/30 drop-shadow-xl inline-block mx-4 pl-4 w-[60%]">
-              {name}
+            {fillInData?.singleFields[1].text}
               <div className="w-[45%] float-right">
                 {/*  Have this go to resume or portfolio? */}
                 <AiOutlineSearch
@@ -127,7 +217,8 @@ function GoogleResumeTemplate() {
                   width="15px"
                   className="inline-block"
                 />
-                <p className="inline-block">Junior Software Engineer </p>
+                {/* May change later */}
+                <p className="inline-block">{fillInData?.singleFields[2].text.split(";")[0]}</p>
               </li>
               {/* Make into mail icon? */}
               <li className="inline-block mx-2">
@@ -137,7 +228,7 @@ function GoogleResumeTemplate() {
                   width="15px"
                   className="inline-block"
                 />
-                <p className="inline-block pl-1">ajmikalauskas@hotmail.com </p>
+                <p className="inline-block pl-1">{fillInData?.singleFields[2].text.split(";")[1]}</p>
               </li>
               <li className="inline-block">
                 <img
@@ -147,7 +238,7 @@ function GoogleResumeTemplate() {
                   className="inline-block"
                 />
                 <p className="inline-block pl-1">
-                  Dallas-Fort Worth, TX 75028{" "}
+                  {fillInData?.singleFields[2].text.split(";")[2]}
                 </p>
               </li>
               {/* Make into phone icon? */}
@@ -158,7 +249,7 @@ function GoogleResumeTemplate() {
                   width="10px"
                   className="inline-block"
                 />
-                <p className="inline-block pl-1">(214) 970-4799 </p>
+                <p className="inline-block pl-1">{fillInData?.singleFields[2].text.split(";")[3]}</p>
               </li>
             </ul>
             <hr className="border-gray" />
@@ -171,23 +262,23 @@ function GoogleResumeTemplate() {
           <div className="">
             {/* Create a */}
             <div className="">
-                <a href={Projects[1].link} target="_blank" rel="noreferrer" >
+                <a href={fillInData?.projects[0].link} target="_blank" rel="noreferrer" >
               <div className="flex">
                 <p className="text-sm font-semibold">Project</p>
                 <p
                   className="ml-2"
                   style={{ fontSize: "9px", lineHeight: "1.25rem", paddingTop: "1.5px"}}
                 >
-                  {Projects[1].link}
+                  {fillInData?.projects[0].link}
                 </p>
               </div>
               <p className="text-sky-700 font-semibold text-sm hover:underline">
-                {Projects[1].name} | {Projects[1].timestamp}
+                {fillInData?.projects[0].name} | {fillInData?.projects[0].timestamp}
               </p>
               </a>
               <p className="text-xs" style={{ fontSize: "10px" }}>
                 <ul>
-                  {project2BulletPoints.map((bp, idx) => (
+                  {fillInData?.projects[0].explanationBulletPoints.split(".").map((bp, idx) => (
                     <li key={idx}> {bp} </li>
                   ))}
                 </ul>
@@ -195,23 +286,23 @@ function GoogleResumeTemplate() {
             </div>
             <div className="mt-6">
               {/* "https://dapp-exchange.surge.sh/" */}
-            <a href={Projects[0].link} target="_blank" rel="noreferrer">
+            <a href={fillInData?.projects[1].link} target="_blank" rel="noreferrer">
               <div className="flex">
                 <p className="text-sm font-semibold">Project 2</p>
                 <p
                   className="ml-2 pt-0.25"
                   style={{ fontSize: "9px", lineHeight: "1.25rem", paddingTop: "1.5px" }}
                 >
-                  {Projects[0].link}
+                  {fillInData?.projects[1].link}
                 </p>
               </div>
               <p className="text-sky-700 font-semibold text-sm hover:underline">
-                {Projects[0].name} | {Projects[0].timestamp}
+                {fillInData?.projects[1].name} | {fillInData?.projects[1].timestamp}
               </p>
               </a>
               <p className="text-xs" style={{ fontSize: "10px" }}>
                 <ul>
-                  {project1BulletPoints.map((bp, idx) => (
+                  {fillInData?.projects[1].explanationBulletPoints.split(".").map((bp, idx) => (
                     <li key={idx}> {bp} </li>
                   ))}
                 </ul>
@@ -223,7 +314,8 @@ function GoogleResumeTemplate() {
                 <p className="text-sm font-semibold">Education</p>
               </div>
               <p className="text-sky-700 font-semibold text-sm">
-                Flower Mound High School |  High School Degree
+
+              {fillInData?.singleFields[0].text.split(",")[1]} |   {fillInData?.singleFields[0].text.split(",")[0]}
               </p>
               <p className="text-xs" style={{ fontSize: "10px" }}>
                 <ul>
@@ -276,15 +368,15 @@ function GoogleResumeTemplate() {
                           <span className="float-left align-middle">
                             <img alt="googleMapsIcon" src={googleMapsIcon} width="30px" className='rounded-lg'/>
                           </span>
-                          <p className="pt-1"><strong>{googleMapsData.name}</strong></p>
+                          <p className="pt-1"><strong>{fillInData?.otherProjects[1].name}</strong></p>
                           <div className="text-xs pt-1.5 pl-2 ">
-                            (<span className="text-sky-700 hover:underline cursor-pointer font-semibold"><a href={googleMapsData.link}>Demo</a></span>) 
+                            (<span className="text-sky-700 hover:underline cursor-pointer font-semibold"><a href={fillInData?.otherProjects[1].link}>Demo</a></span>) 
                              <span> - </span> 
-                            (<span className="text-sky-700 hover:underline cursor-pointer font-semibold"><a href={googleMapsData.github}>GitHub</a></span>)
+                            (<span className="text-sky-700 hover:underline cursor-pointer font-semibold"><a href={fillInData?.otherProjects[1].github}>GitHub</a></span>)
                           </div>
                         </div>
                         <p className="text-xs">
-                          {googleMapsData.description}
+                          {fillInData?.otherProjects[1].description}
                         </p>
                       </li>
                       <li>
@@ -292,15 +384,15 @@ function GoogleResumeTemplate() {
                           <span className="float-left align-middle">
                             <img alt="googleMapsIcon" src={bibleIcon} width="30px" className='rounded-lg'/>
                           </span>
-                          <p className="pt-1"><strong>{bibleRatingData.name}</strong> </p>
+                          <p className="pt-1"><strong>{fillInData?.otherProjects[0].name}</strong> </p>
                           <div className="text-xs pt-1.5 pl-2 ">
-                            (<span className="text-sky-700 hover:underline cursor-pointer font-semibold"><a href={bibleRatingData.link}>Demo</a></span>) 
+                            (<span className="text-sky-700 hover:underline cursor-pointer font-semibold"><a href={fillInData?.otherProjects[0].link}>Demo</a></span>) 
                              <span> - </span> 
-                            (<span className="text-sky-700 hover:underline cursor-pointer font-semibold"><a href={bibleRatingData.github}>GitHub</a></span>)
+                            (<span className="text-sky-700 hover:underline cursor-pointer font-semibold"><a href={fillInData?.otherProjects[0].github}>GitHub</a></span>)
                           </div>
                         </div>
                         <p className="text-xs">
-                          {bibleRatingData.description}
+                          {fillInData?.otherProjects[0].description}
                         </p>
                       </li>
                     </ul>
@@ -327,7 +419,7 @@ function GoogleResumeTemplate() {
                       aria-controls="collapseOne5"
                       style={{fontSize: "10px", lineHeight: "1rem"}}
                     >
-                      Frontend Development
+                      {fillInData?.skills[0].skillSetName}
                     </button>
                   </h2>
                   <div
@@ -337,7 +429,7 @@ function GoogleResumeTemplate() {
                   >
                     <div className="accordion-body text-xs">
                         <ul>
-                            {Skills["Frontend Development"].map((skillName, idx) => (
+                          {fillInData?.skills[0].skills.map((skillName, idx) => (
                                 <li key={idx} className="mb-1.5">{skillName}</li>
                             ))}
                       </ul>
@@ -355,7 +447,7 @@ function GoogleResumeTemplate() {
                       aria-controls="collapseTwo5"
                       style={{fontSize: "10px", lineHeight: "1rem"}}
                     >
-                      Backend Development
+                      {fillInData?.skills[1].skillSetName}
                     </button>
                   </h2>
                   <div
@@ -365,7 +457,7 @@ function GoogleResumeTemplate() {
                   >
                     <div className="accordion-body text-xs">
                         <ul>
-                            {Skills["Backend Development"].map((skillName, idx) => (
+                            {fillInData?.skills[1].skills.map((skillName, idx) => (
                                 <li key={idx} className="mb-1.5">{skillName}</li>
                             ))}
                       </ul>
@@ -383,7 +475,7 @@ function GoogleResumeTemplate() {
                       aria-controls="collapseThree5"
                       style={{fontSize: "10px", lineHeight: "1rem"}}
                     >
-                      Soft Skills
+                      {fillInData?.skills[2].skillSetName}
                     </button>
                   </h2>
                   <div
@@ -393,7 +485,7 @@ function GoogleResumeTemplate() {
                   >
                     <div className="accordion-body text-xs">
                         <ul>
-                            {Skills["Soft Skills"].map((skillName, idx) => (
+                            {fillInData?.skills[2].skills.map((skillName, idx) => (
                                 <li key={idx} className="mb-1.5">{skillName}</li>
                             ))}
                       </ul>
@@ -411,6 +503,8 @@ function GoogleResumeTemplate() {
             </a>
         </div> */}
     </div>
+    }
+    </>
   );
 }
 

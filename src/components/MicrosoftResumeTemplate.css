@@ -43,17 +43,6 @@
 
 /* Backend Development */
 
- /* .dropdown-menu-2 .list-item-0-showing{
-    animation: animation2 300ms ease-in-out forwards;
-    animation-delay: -150ms;
-    padding-top: 10px;
-}
-
-.dropdown-menu-2 .list-item-1-showing{
-    animation: animation2 300ms ease-in-out forwards;
-    animation-delay: 0ms;
-} */
-
 .dropdown-menu-2 li{
     transform-origin: top center;
     opacity: 0;

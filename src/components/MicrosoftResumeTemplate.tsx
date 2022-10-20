@@ -1,11 +1,9 @@
-import { useState } from 'react'; 
+import { useState, useEffect, useRef, useCallback } from 'react'; 
 import "./MicrosoftResumeTemplate.css";
-// import bgImg from "../src/img/microsoft-bg.png";
 import ethIcon from "../img/eth.png";
-import fmhsIcon from "../img/fmhsLogo.png";
+//import fmhsIcon from "../img/fmhsLogo.png";
 // AiOutlinePoweroff
 import {AiOutlineSearch, AiOutlineCaretDown, AiOutlineCaretUp, AiOutlineCaretRight}  from "react-icons/ai";
-//import linkedinPicOfMe from "../src/img/linkedinprofile.png";
 import windows11Icon from "../img/windows-11-icon.png";
 import taskViewIcon from "../img/task-view.png";
 import fileExplorerIcon from "../img/file-explorer.png";
@@ -13,53 +11,122 @@ import mailIcon from "../img/mail.png";
 import phoneIcon from "../img/mobile-phone.png";
 import linkedInIcon from "../img/linkedin.png";
 import githubIcon from "../img/github.png";
-import settingsIcon from "../img/settings.png"
+//import settingsIcon from "../img/settings.png"
 import bibleIcon from "../img/bible-icon.png"
 import googleMapsIcon from "../img/google-maps-icon.png";
-import dummydata from "./DummyData.json";
-import { Link, useNavigate } from 'react-router-dom';
-//import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
+import homeIcon from "../img/home-icon.png"
+import googleLogo from "../img/google-logo.png";
+//import dummydata from "./DummyData.json";
+import { useNavigate } from 'react-router-dom';
+//import Modal from './Modal';
+import axios from 'axios';
 
-// const socialIcons: {icon: JSX.Element, url: string}[] = [
-//   {
-//     icon: <AiOutlineSearch/>,
-//     url: "./"
-//   }
-// ]
+type skillsType = {
+  id: string, 
+  skillSetName: string,
+  skills: Array<string>,
+  _id: string
+}
 
+type otherProjectsType = {
+  description: string,
+  github: string,
+  id: string,
+  link: string,
+  name: string,
+  _id: string
+}
 
+type projectsType = {
+  explanationBulletPoints: string,
+  github: string,
+  id: string,
+  link: string,
+  name: string,
+  techStack: string,
+  timestamp: string,
+  _id: string
+}
+
+type singleFieldsType = {
+  id: string,
+  text: string,
+  _id: string
+}
+
+type fields = {
+  otherProjects: Array<otherProjectsType>, 
+  projects: Array<projectsType>, 
+  singleFields: Array<singleFieldsType>,
+  skills: Array<skillsType> 
+}
+
+// { data } : Props
 function MicrosoftResumeTemplate() {
+  const [isLoading, setIsLoading] = useState(false);
+  // Would in this instance the async await not wokr but promises would?
+  async function pushTestReq() {
+    setIsLoading(true);
+    try {
+      const res = await axios.get("http://localhost:5000/retrieveAllData");
+      console.log(res.data);
+      console.log("successful in adding to database");
+      // const { otherProjects, projects, singleFields, skills} = res.data;
+      console.log(typeof res.data)
+      const data: fields = res?.data;
+      console.log(fillInData);
+     setFillInData(data);
+    }catch(err) {
+     console.log(err);
+    }
+    setIsLoading(false);
+  } 
+
+  const [fillInData,setFillInData] = useState<fields>();
+  const effectRan = useRef(false);
+
+useEffect(() => {
+  if(effectRan.current === false) {
+    pushTestReq();
+  
+    return () =>  {
+      console.log('unmounted')
+      effectRan.current = true;
+    }
+}
+
+})
+  //console.log(data);
+// const {otherProjects, projects, skills, singleFields} = data;
   const [proj1Showing, setProj1Showing] = useState(false);
   const [proj2Showing, setProj2Showing] = useState(false);
   const [frontendSkillsShowing, setFrontendSkillsShowing] = useState(true);
   const [backendSkillsShowing, setBackendSkillsShowing] = useState(true);
+  //const [isOpen,setIsOpen] = useState(true);
   // OtherProjects
-  const { name, Projects, Education, Skills, OtherProjects } = dummydata;
+ // const { name, Projects, Education, Skills, OtherProjects } = dummydata;
     // Arrays of Bullet Points
-  const project1BulletPoints = Projects[0].explanationBulletPoints.split(".");
-  const project2BulletPoints = Projects[1].explanationBulletPoints.split(".");
-  const educationSplit = Education.split(".");
+ // const project1BulletPoints = fillInData?.projects[0].explanationBulletPoints.split(".");
+  //const project2BulletPoints = Projects[1].explanationBulletPoints.split(".");
+
 
   // Navigation to Previous Page
   let navigate = useNavigate();
-  function handleNavToHome(e: any) {
+  const handleNavToHome = useCallback((e:any, page: string | undefined) => {
     e.preventDefault();
-    navigate('/');
-  }
-
-  const googleMapsData = OtherProjects['Google Maps App'];
-  const bibleRatingData = OtherProjects['Rate App'];
-
+    navigate(`/${page && page}`);
+  }, [navigate]);
 
   return (
-  <div className="max-w-[1000px] m-auto p-9 justify-center w-full h-full"> 
-    {/* bg-no-repeat bg-contain bg-center custom-img */}
-    {/* className="rounded-md flex justify-center mx-auto bg-no-repeat bg-contain bg-center custom-img" */}
-    {/* <div className="float-left w-[15%] h-[10%] mt-[40%]">
-            <a className="hover:cursor-pointer">
-                <BsFillArrowLeftCircleFill size="50px" className=" rounded-[50%] border-1 border-blue-500" />
-            </a>
-        </div> */}
+    <>
+    {!isLoading &&
+  <div className="max-w-[1000px] m-auto p-9 justify-center w-full h-full relative z-10"> 
+        <div className='float-left p-2 text-sm bg-white/40 rounded-lg mt-[40%] hover:cursor-pointer hover:bg-white/70' onClick={(event) => {handleNavToHome(event,"")}}>
+            <img src={homeIcon} alt="home-icon" width="50px" className=''/>
+        </div>
+        <div className='float-right p-2 text-sm bg-white/40 rounded-lg mt-[41%] hover:cursor-pointer hover:bg-white/70' onClick={(event) => {handleNavToHome(event,"google")}}>
+            <img src={googleLogo} alt="google-logo-icon" width="100px" className=''/>
+        </div>
       <div className="rounded-md justify-center mx-auto bg-no-repeat bg-cover bg-center custom-img relative h-[92.25vh] w-[63%]">
         <div className="rounded-md bg-[#000]/50 p-4 text-white relative max-h-[85vh] overflow-y-scroll hide-scrollbar">
           <div className="rounded-md bg-[#fff]/50 h-8 text-center">
@@ -69,7 +136,7 @@ function MicrosoftResumeTemplate() {
             {/* <div className="float-right"> */}
             <p className="pt-1.5">
               {/* Preset withn mongodb data later */}
-            {name}
+            {fillInData?.singleFields[1].text}
             </p>
             {/* </div> */}
           </div>
@@ -82,21 +149,21 @@ function MicrosoftResumeTemplate() {
               {/*  To Be Dynamic Later */}
                 {/* Mini Arrow Icon to the right of this? */}
                 <span className="font-medium">
-                  {Projects[1].name}
+                  {fillInData?.projects[0].name}
                 </span>
                 <span className="font-extralight text-sm ml-4">
-                  {Projects[1].timestamp}
+                  {fillInData?.projects[0].timestamp}
                 </span>
 
                 <div>
                 <span className="font-extralight text-sm">
                   {/* Link a tag to new page using target and rel properties/attributes */}
                   {/* "https://crypto-app-demo.netlify.app/loggedOutHome" */}
-                    (<a href={Projects[1].link} className='text-sky-300 hover:underline' target="_blank" rel="noreferrer">
+                    (<a href={fillInData?.projects[0].link} className='text-sky-300 hover:underline' target="_blank" rel="noreferrer">
                         Demo
                     </a>)
                   - 
-                  (<a href={Projects[1].github} className='text-sky-300 hover:underline' target="_blank" rel="noreferrer">GitHub</a>)
+                  (<a href={fillInData?.projects[0].github} className='text-sky-300 hover:underline' target="_blank" rel="noreferrer">GitHub</a>)
                 </span>
                 <span className='float-right mr-10'>
                   {/* How to create an accordion animation? */}
@@ -111,12 +178,12 @@ function MicrosoftResumeTemplate() {
             <div className={`${proj1Showing ? '' : 'hidden'}`} >
             <ul style={{ listStyle: 'disc', fontSize: '12px'}} className="float-right pl-20 text-sm pb-4">
             {
-                project2BulletPoints.map((bp,idx) => (
+                fillInData?.projects[0].explanationBulletPoints.split(".").map((bp,idx) => (
                     <li key={idx}>{bp}</li>
                 ))
             }
             </ul>
-            <p className="text-sm mx-4 "><b><u>Tech Stack:</u></b> {Projects[1].techStack}</p>
+            <p className="text-sm mx-4 "><b><u>Tech Stack:</u></b> {fillInData?.projects[0].techStack}</p>
             </div>
           </div>
           {/* 2nd Project */}
@@ -126,20 +193,20 @@ function MicrosoftResumeTemplate() {
               {/*  To Be Dynamic Later */}
                 {/* Mini Arrow Icon to the right of this? */}
                 <span className="font-medium">
-                  {Projects[0].name}
+                  {fillInData?.projects[1].name}
                 </span>
                 <span className="font-extralight text-sm ml-4">
-                  {Projects[0].timestamp}
+                  {fillInData?.projects[1].timestamp}
                 </span>
 
                 <div>
 
                   <span className="font-extralight text-sm">
                     {/* https://dapp-exchange.surge.sh/ */}
-                    (<a href={Projects[0].link} className='text-sky-300 hover:underline' target="_blank" rel="noreferrer">Demo</a>)
+                    (<a href={fillInData?.projects[1].link} className='text-sky-300 hover:underline' target="_blank" rel="noreferrer">Demo</a>)
                     - 
-                    (<a href={Projects[0].github} className="text-sky-300 hover:underline" target="_blank" rel="noreferrer">GitHub</a>)
-                    - (<Link to="/crypto-app" className='text-sky-300 hover:underline'>Description</Link>)
+                    (<a href={fillInData?.projects[1].github} className="text-sky-300 hover:underline" target="_blank" rel="noreferrer">GitHub</a>)
+                    {/* - (<Link to="/crypto-app" className='text-sky-300 hover:underline'>Description</Link>) */}
                   </span>
 
                   <span className='float-right mr-10'>
@@ -160,36 +227,36 @@ function MicrosoftResumeTemplate() {
                   <li> Designed and created a fully responsive home page with a table, chart, and a search system using the Coin Gecko API & deployed using Netlify</li>
                   <li>Designed API Controllers on the Backend & deployed using Heroku</li> */}
             {
-                project1BulletPoints.map((bp,idx) => (
+                fillInData?.projects[1].explanationBulletPoints.split(".").map((bp,idx) => (
                     <li key={idx}>{bp}</li>
                 ))
             }
 
             </ul>
             {/*  Remove duplicates in lists? */}
-            <p className="text-sm mx-4 "><b><u>Tech Stack:</u></b> {Projects[0].techStack}</p>
+            <p className="text-sm mx-4 "><b><u>Tech Stack:</u></b> {fillInData?.projects[0].techStack}</p>
           </div>
           </div>
           {/* Education Section */}
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <p className="text-2xl font-semibold mb-1">Education</p>
-          {/*  Link to flowermound or something with group property? */}
+          {/*  Link to flowermound or something with group property? 
           <div className="rounded-sm bg-[#fff]/30 text-center font-bold h-[50px]">
             <span className="float-left align-middle mt-1 ml-1">
-            {/* <AiOutlineSearch size="25px"/> */}
+            {/* <AiOutlineSearch size="25px"/>
             <img alt="fmhsLogo" src={fmhsIcon} width="75px" className='rounded-lg'/>
             </span>
             <div className='text-sm pt-4 pr-2'>
                 {educationSplit[0]}
             </div>
           </div>
-        </div>
+        </div> */}
         <div className='mt-6'>
           <p className=" text-2xl font-semibold">Skills</p>
         <div className="mt-2 grid grid-cols-2 gap-4">
           <div>
             <div className='mb-2'>
-              <span className="font-semibold">Frontend Development</span>
+              <span className="font-semibold">{fillInData?.skills[0].skillSetName}</span>
               <span className='float-right'>
                   {/* How to create an accordion animation? */}
                   { frontendSkillsShowing ?
@@ -201,7 +268,7 @@ function MicrosoftResumeTemplate() {
             </div>
             <div className={`rounded-sm text-center ${!frontendSkillsShowing && 'hidden'}`}>
                 <ul className='text-left dropdown-menu-1 '>
-                    {Skills['Frontend Development'].map((skill, idx) => (
+                    {fillInData?.skills[0].skills.map((skill: string, idx: number) => (
                         <li key={idx} className={`list-item-${idx} bg-[#fff]/30 px-2`}>{skill}</li>
                     ))}
                   {/* <li>React.js</li>
@@ -215,7 +282,7 @@ function MicrosoftResumeTemplate() {
 
           <div>
           <div className='mb-2'>
-              <span className="font-semibold">Backend Development</span>
+              <span className="font-semibold">{fillInData?.skills[1].skillSetName}</span>
               <span className='float-right'>
                   {/* How to create an accordion animation? */}
                   { backendSkillsShowing ?
@@ -227,7 +294,7 @@ function MicrosoftResumeTemplate() {
             </div>
             <div className={`rounded-sm ${!backendSkillsShowing && 'hidden'}`}>
             <ul className='text-left dropdown-menu-2'>
-                {Skills['Backend Development'].map((skill, idx) => (
+                {fillInData?.skills[1].skills.map((skill: string, idx: number) => (
                         <li key={idx} className="bg-[#fff]/30 px-2">{skill}</li>
                 ))}
                   {/* <li>C#</li>
@@ -251,17 +318,19 @@ function MicrosoftResumeTemplate() {
             </span>
             <div className='pt-2'>
               <span className="">
-                {googleMapsData.name}
+                {fillInData?.otherProjects[1].name}
               </span>
 
               <span className='float-right mr-2 mt-3'>
+              <a href={fillInData?.otherProjects[1].link} target="_blank" rel="noreferrer">
                 <AiOutlineCaretRight size="25px"/>
+                </a>
               </span>
 
               <div className='text-xs'>
-                (<a href={googleMapsData.link} className='hover:underline text-sky-300' target="_blank" rel="noreferrer">Demo</a>) 
+                (<a href={fillInData?.otherProjects[1].link} className='hover:underline text-sky-300' target="_blank" rel="noreferrer">Demo</a>) 
                 - 
-                (<a href={googleMapsData.github} className='hover:underline text-sky-300' target="_blank" rel="noreferrer">GitHub</a>)  
+                (<a href={fillInData?.otherProjects[1].github} className='hover:underline text-sky-300' target="_blank" rel="noreferrer">GitHub</a>)  
               </div>
             </div>
           </div>
@@ -273,15 +342,17 @@ function MicrosoftResumeTemplate() {
             </span>
             <div className='pt-2'>
               <span className="">
-                  {bibleRatingData.name}
+                  {fillInData?.otherProjects[0].name}
               </span>
               <span className='float-right mr-2 mt-3'>
+                <a href={fillInData?.otherProjects[0].link} target="_blank" rel="noreferrer">
                 <AiOutlineCaretRight size="25px"/>
+                </a>
               </span>
               <div className='text-xs'>
-                (<a href={bibleRatingData.link} className='hover:underline text-sky-300' target="_blank" rel="noreferrer">Demo</a>) 
+                (<a href={fillInData?.otherProjects[0].link} className='hover:underline text-sky-300' target="_blank" rel="noreferrer">Demo</a>) 
                 - 
-                (<a href={bibleRatingData.github} className='hover:underline text-sky-300' target="_blank" rel="noreferrer">GitHub</a>)  
+                (<a href={fillInData?.otherProjects[0].github} className='hover:underline text-sky-300' target="_blank" rel="noreferrer">GitHub</a>)  
               </div>
 
             </div>
@@ -301,7 +372,7 @@ function MicrosoftResumeTemplate() {
         </div> */}
       </div>     
         <div className='absolute bottom-0 bg-[#000]/60 w-full overflow-hidden h-[5%] flex py-1 justify-evenly'>
-          <div onClick={handleNavToHome} className="hover:cursor-pointer">
+          <div onClick={(event) => {handleNavToHome(event,"")}} className="hover:cursor-pointer">
             <img src={windows11Icon} alt="windows-11-icon" width="35px" className='items-center flex hover:bg-white/40 rounded-md'/>
           </div>
 
@@ -332,6 +403,8 @@ function MicrosoftResumeTemplate() {
             </a>
         </div> */}
   </div>
+  }
+  </>
 );
 }
 
