@@ -29,6 +29,11 @@ const PORT = process.env.PORT || 5000;
 //     apiKey: "ff16a84ee287677a6eebe3bf2c347da1-us14",
 //     server: "us14",
 // })
+// To make sure app is running on heroku
+app.get('/', (req,res) => {
+    res.send('APP IS RUNNING');
+})
+
 app.get('/retrieveAllData', async(req,res) => {
   //  const foundProjects = await Projects.find().exec();
 
