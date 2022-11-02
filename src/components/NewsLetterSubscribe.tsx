@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import axios from './api/axios';
+import axios from 'axios';
 import "./NewsLetterSub.css";
 
 const NewsletterSubscribe = () => {
@@ -7,7 +7,7 @@ const NewsletterSubscribe = () => {
     // // Will Add Later
     const [email, setEmail] = useState("");
     const [state, setState] = useState("IDLE");
-    const [status, setStatus] = useState(0);
+    const [status, setStatus] = useState("");
     const [errorMsg, setErrorMsg] = useState(null);
 
     const subscribe = async(e: any) => {
@@ -16,12 +16,20 @@ const NewsletterSubscribe = () => {
         setErrorMsg(null);
 
         try {
-            const response = await axios.post("/addSubscriber", { email });
-            const data = await response.data;
-            setStatus(response.status);
-            setState(data.msg)
+            const response = await axios.post("https://emailfunctionappdynamicresume.azurewebsites.net/api/PostHttpTrigger?code=Nc002lKofaiEagCMXFK3J_Ob4Uh7oUkeitlJ-O_WdAmnAzFuOSkC9g==", { email }, {
+                headers: {
+                    // "Access-Control-Allow-Headers": "Origin",
+                    'Access-Control-Allow-Origin' : '*',
+                    "Content-Type": "application/json"
+                }
+            });
+            //const data = await response;
+            console.log(response);
+           setStatus(response.data);
+           setState("SUCCESS");
         } catch(e: any) {
-            setErrorMsg(e.response.data.error);
+            console.log(e);
+            setErrorMsg(e?.response?.data);
             setState("ERROR");
         }
     }
@@ -56,9 +64,9 @@ const NewsletterSubscribe = () => {
                     <p className=' text-white'>{errorMsg}</p>
                 </div>
             )}
-            {status === 200 && (
+            {state === "SUCCESS" && (
                 <div className='bg-green-600 mt-2 text-center w-[25%] p-2'>
-                    <p className=' text-white'>{state}</p>
+                    <p className=' text-white'>{status}</p>
                 </div>
             )}
         </div>
