@@ -35,7 +35,7 @@ const NewsletterSubscribe = () => {
     }
 
     return (
-        <div className='max-h-[500px] flex flex-col items-center w-full p-6 border-white border-solid border rounded-sm mt-[5%] text-white z-10 relative fillScreen'>
+        <div className='max-h-[500px] flex flex-col items-center w-full p-6 border-white border-solid border rounded-sm mt-[5%] text-white z-10 relative fillScreen sm:mt-[12%] xs:mt-[10%] lg:mt-[7%]'>
             <div className='text-3xl font-bold text-center '>
                 Subscribe To My Newsletter!
             </div>
