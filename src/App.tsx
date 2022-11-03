@@ -113,15 +113,15 @@ function App() {
       </div>
       <div className="mt-[50px] mx-[5%] justify-evenly flex h-[400px] font-semibold z-20 relative">
         {/* lg is laptop size screen */}
-        <Link to="/microsoft" className="hover:scale-125 text-center w-[275px] md:w-[225px]" style={{transition: "transform .5s"}}>
+        <Link to="/microsoft" className="hover:scale-125 text-center w-[275px] sm:w-[150px] sm:h-[80%]  lg:w-[225px]" style={{transition: "transform .5s"}}>
           <div>Microsoft</div>
           <img src={microsoftTemplateSmall} alt="microsoft-template-small" className=" w-[100%] items-center h-full" />
         </Link>
-        <Link to="/google" className="hover:scale-125 text-center w-[275px] md:w-[225px]" style={{transition: "transform .5s"}}>
+        <Link to="/google" className="hover:scale-125 text-center w-[275px] sm:w-[150px] sm:h-[80%] lg:w-[225px]" style={{transition: "transform .5s"}}>
           <div>Google</div>
           <img src={googleTemplateSmall} alt="google-template-small" className="w-[100%] items-center h-full" style={{transition: "transform .5s"}}/>
         </Link>
-        <Link to="/facebook" className="hover:scale-125 text-center w-[275px] md:w-[225px]" style={{transition: "transform .5s"}}>
+        <Link to="/facebook" className="hover:scale-125 text-center w-[275px] sm:w-[150px] sm:h-[80%] lg:w-[225px]" style={{transition: "transform .5s"}}>
           <div>Facebook</div>
           <img src={facebookTemplateSmall} alt="facebook-template-small" className=" w-[100%] h-full items-center" style={{transition: "transform .5s"}}/>
         </Link>
