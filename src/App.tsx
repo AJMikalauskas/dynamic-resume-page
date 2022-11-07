@@ -66,8 +66,8 @@ function App() {
   return (
     // bg bg-gradient-to-r from-[#159957] to-[#155799]
     // bg bg-gradient-to-r from-[#159957] to-[#155799]
-    <div className="text-white bg bg-gradient-to-r from-[#159957] to-[#155799]">
-        <div className="w-full h-full">
+    <div className="text-white bg bg-gradient-to-r from-[#159957] to-[#155799] h-screen">
+        <div className="w-full">
         <ul className="box">
           <li></li>
           <li></li>
