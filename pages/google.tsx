@@ -19,7 +19,7 @@ const google = ({allData}:Props) => {
 export const getServerSideProps: GetServerSideProps = async(context) => {
   // Set states by passing in as props, no need for loading state?
   let allData = await getResumeData();
-  if(!allData.otherProjects || !allData.projects || !allData.singleFields || !allData.skills) throw new Error('Failed to fetch Resume Data google');
+ // if(!allData.otherProjects || !allData.projects || !allData.singleFields || !allData.skills) throw new Error('Failed to fetch Resume Data google');
  // console.log({otherProjects, projects, singleFields, skills});
 
 
