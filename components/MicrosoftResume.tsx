@@ -22,7 +22,7 @@ import Head from 'next/head';
 
 
 interface Props {
-    data: string;
+    data: fields;
 }
 // { data } : Props
 function MicrosoftResume({ data }: Props) {
@@ -30,7 +30,7 @@ function MicrosoftResume({ data }: Props) {
   // Should I have an isLoading state w/NextJS features?
   const [isLoading, setIsLoading] = useState(false);
   // console.log(data);
-  const [fillInData,setFillInData] = useState<fields>(JSON.parse(data));
+  const [fillInData,setFillInData] = useState<fields>(data);
   const [proj1Showing, setProj1Showing] = useState(false);
   const [proj2Showing, setProj2Showing] = useState(false);
   const [frontendSkillsShowing, setFrontendSkillsShowing] = useState(true);

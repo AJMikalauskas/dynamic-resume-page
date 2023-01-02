@@ -5,7 +5,7 @@ import { fields } from "../typings"
 import getResumeData from "../lib/retrieveData";
 
 interface Props {
-  allData: string,
+  allData: fields,
 }
 
 const google = ({allData}:Props) => {
@@ -25,7 +25,7 @@ export const getStaticProps: GetStaticProps = async(context) => {
 
 
   return {
-    props: { allData: JSON.stringify(allData) }
+    props: { allData: JSON.parse(JSON.stringify(allData)) }
     //revalidate: 60, // after 60 seconds it will update the old cached version 
   }
 }
