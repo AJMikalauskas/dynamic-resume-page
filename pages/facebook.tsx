@@ -3,10 +3,26 @@ import GoogleResume from "../components/GoogleResume"
 import FacebookResume from "../components/FacebookResume"
 import { fields } from "../typings"
 import getResumeData from "../lib/retrieveData";
+import {server} from "../config";
 
 interface Props {
   allData: fields,
 }
+
+const fetchResumeData = async () => {
+  // try {
+    let resumeData = await fetch(`${server}/api/retrieveAllData`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return resumeData.json();
+    //return res.status(200).json();
+  // } catch (error) {
+  //   throw new Error("Problem Fetching Resume Data Google");
+  // }
+};
 
 const facebook = ({allData}:Props) => {
   //console.log(allData);
@@ -18,7 +34,7 @@ const facebook = ({allData}:Props) => {
 //async function
 export const getStaticProps: GetStaticProps = async(context) => {
   // Set states by passing in as props, no need for loading state?
-  let allData = await getResumeData();
+  let allData = await fetchResumeData();
  // if(!allData.otherProjects || !allData.projects || !allData.singleFields || !allData.skills) throw new Error('Failed to fetch Resume Data facebook');
  // console.log({otherProjects, projects, singleFields, skills});
 

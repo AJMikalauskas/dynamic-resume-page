@@ -1,32 +1,46 @@
-import { GetServerSideProps, GetStaticProps } from "next"
-import GoogleResume from "../components/GoogleResume"
-import MicrosoftResume from "../components/MicrosoftResume"
-import { fields } from "../typings"
+import { GetServerSideProps, GetStaticProps } from "next";
+import GoogleResume from "../components/GoogleResume";
+import MicrosoftResume from "../components/MicrosoftResume";
+import { fields } from "../typings";
 import getResumeData from "../lib/retrieveData";
+import { server } from "../config";
 
 interface Props {
-  allData: fields,
+  allData: fields;
 }
 
-const google = ({allData}:Props) => {
+const fetchResumeData = async () => {
+  // try {
+    let resumeData = await fetch(`${server}/api/retrieveAllData`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return resumeData.json();
+    //return res.status(200).json();
+  // } catch (error) {
+  //   throw new Error("Problem Fetching Resume Data Google");
+  // }
+};
+
+const google = ({ allData }: Props) => {
   //console.log(allData);
-  return (
-     <GoogleResume data={allData} />
-  )
-}
+  return <GoogleResume data={allData} />;
+};
 // SSG - getStaticProps vs SSR - getServerSideProps?
 //async function
-export const getStaticProps: GetStaticProps = async(context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   // Set states by passing in as props, no need for loading state?
   // Test
-  let allData = await getResumeData();
- // if(!allData.otherProjects || !allData.projects || !allData.singleFields || !allData.skills) throw new Error('Failed to fetch Resume Data google');
- // console.log({otherProjects, projects, singleFields, skills});
-
+  let allData = await fetchResumeData();
+  console.log(allData);
+  // if(!allData.otherProjects || !allData.projects || !allData.singleFields || !allData.skills) throw new Error('Failed to fetch Resume Data google');
+  // console.log({otherProjects, projects, singleFields, skills});
 
   return {
-    props: { allData }
-    //revalidate: 60, // after 60 seconds it will update the old cached version 
-  }
-}
+    props: { allData },
+    //revalidate: 60, // after 60 seconds it will update the old cached version
+  };
+};
 export default google;

@@ -2,10 +2,26 @@
 import MicrosoftResume from "../components/MicrosoftResume"
 import { fields } from "../typings"
 import getResumeData from "../lib/retrieveData";
+import {server} from "../config";
 
 interface Props {
   allData: fields,
 }
+
+const fetchResumeData = async () => {
+  // try {
+    let resumeData = await fetch(`${server}/api/retrieveAllData`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return resumeData.json();
+    //return res.status(200).json();
+  // } catch (error) {
+  //   throw new Error("Problem Fetching Resume Data Google");
+  // }
+};
 
 const microsoft = ({allData}:Props) => {
   //console.log(allData);
@@ -35,7 +51,7 @@ export const getStaticProps: GetStaticProps = async(context) => {
   //   return data.data;
   // });
   // let returnData = await res;
-  let allData = await getResumeData();
+  let allData = await fetchResumeData();
   //if(!allData.otherProjects || !allData.projects || !allData.singleFields || !allData.skills) throw new Error('Failed to fetch Resume Data microsoft');
  // console.log({otherProjects, projects, singleFields, skills});
 
