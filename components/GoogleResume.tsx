@@ -19,15 +19,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
-    data: fields
+    data: string
 }
 
 function GoogleResume({data}: Props) {
 
     // Is there a need for these?
 const [isLoading, setIsLoading] = useState(false);
-console.log(data);
-const [fillInData,setFillInData] = useState<fields>(data);
+// console.log(data);
+const [fillInData,setFillInData] = useState<fields>(JSON.parse(data));
     // Navigate to pages using TS
 //   let navigate = useNavigate();
 //   const handleNavToHome = useCallback((e:any, page: string | undefined) => {
@@ -322,7 +322,7 @@ const [fillInData,setFillInData] = useState<fields>(data);
                   >
                     <div className="accordion-body text-xs">
                         <ul>
-                          {data.skills[1].skills.map((skillName, idx) => (
+                          {fillInData.skills[1].skills.map((skillName, idx) => (
                                 <li key={idx} className="mb-1.5">{skillName}</li>
                             ))}
                       </ul>

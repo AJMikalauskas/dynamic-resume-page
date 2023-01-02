@@ -22,12 +22,12 @@ import Head from "next/head";
 
 
 interface Props {
-    data: fields;
+    data: string;
 }
 function FacebookResume({data}:Props) {
   const [isLoading, setIsLoading] = useState(false);
 
-  const [fillInData,setFillInData] = useState<fields>(data);
+  const [fillInData,setFillInData] = useState<fields>(JSON.parse(data));
 
   // Navigate to any page w/Typescript
 //   let navigate = useNavigate();

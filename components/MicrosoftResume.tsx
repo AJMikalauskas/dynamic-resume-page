@@ -22,14 +22,15 @@ import Head from 'next/head';
 
 
 interface Props {
-    data: fields;
+    data: string;
 }
 // { data } : Props
 function MicrosoftResume({ data }: Props) {
   // Not really needed for a state to fillInData can just set to a const or use the props passed in
   // Should I have an isLoading state w/NextJS features?
   const [isLoading, setIsLoading] = useState(false);
-  const [fillInData,setFillInData] = useState<fields>(data);
+  // console.log(data);
+  const [fillInData,setFillInData] = useState<fields>(JSON.parse(data));
   const [proj1Showing, setProj1Showing] = useState(false);
   const [proj2Showing, setProj2Showing] = useState(false);
   const [frontendSkillsShowing, setFrontendSkillsShowing] = useState(true);

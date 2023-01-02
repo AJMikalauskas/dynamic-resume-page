@@ -1,11 +1,13 @@
-import { GetStaticProps } from "next"
+import { GetServerSideProps, GetStaticProps } from "next"
 import GoogleResume from "../components/GoogleResume"
 import MicrosoftResume from "../components/MicrosoftResume"
 import { fields } from "../typings"
+import getResumeData from "../lib/retrieveData";
 
 interface Props {
-  allData: fields,
+  allData: string,
 }
+
 const google = ({allData}:Props) => {
   //console.log(allData);
   return (
@@ -14,16 +16,13 @@ const google = ({allData}:Props) => {
 }
 // SSG - getStaticProps vs SSR - getServerSideProps?
 //async function
-export const getStaticProps: GetStaticProps = async(context) => {
+export const getServerSideProps: GetServerSideProps = async(context) => {
   // Set states by passing in as props, no need for loading state?
-  let res = await fetch("http://localhost:3000/api/retrieveAllData", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-  let allData = await res.json();
+  const { otherProjects, projects, singleFields, skills} = await getResumeData();
+  if(!otherProjects || !projects || !singleFields || !skills) throw new Error('Failed to fetch Resume Data google');
+ // console.log({otherProjects, projects, singleFields, skills});
 
+  let allData = JSON.stringify({ otherProjects, projects, singleFields, skills});
   return {
     props: { allData }
     //revalidate: 60, // after 60 seconds it will update the old cached version 

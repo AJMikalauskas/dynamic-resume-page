@@ -8,10 +8,11 @@ import facebookTemplateSmall from "../public/images/facebookTemplateSmall.png";
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import Image from "next/image";
 import Animation from "../components/Animation";
 import Head from "next/head";
+import getResumeData from "../lib/retrieveData";
 const NewsletterSubscribe = dynamic(
   () => import("../components/NewsletterSubscribe"),
   {
@@ -56,26 +57,30 @@ const Home: NextPage = () => {
   // }, [])
 
   const retrieveData = async() => {
-    let dataTst;
-    let res = await fetch("http://localhost:3000/api/retrieveAllData", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then((response) => {
-    return response.json();
-  }).then((data) =>{
-    //console.log(data);
-    //console.log(data.data);
-    //return JSON.parse(data);
-    return data;
-  }).catch((err) => {
-    console.log(err);
-    //setSubmitted(false);
-  });
-  dataTst = await res;
+    // const { otherProjects, projects, singleFields, skills} = await getResumeData();
+    // if(!otherProjects || !projects || !singleFields || !skills) throw new Error('Failed to fetch Resume Data google');
 
-  console.log(dataTst);
+    // return { otherProjects, projects, singleFields, skills};
+  //   let dataTst;
+  //   let res = await fetch("http://localhost:3000/api/retrieveAllData", {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // }).then((response) => {
+  //   return response.json();
+  // }).then((data) =>{
+  //   //console.log(data);
+  //   //console.log(data.data);
+  //   //return JSON.parse(data);
+  //   return data;
+  // }).catch((err) => {
+  //   console.log(err);
+  //   //setSubmitted(false);
+  // });
+  // dataTst = await res;
+
+  // console.log(dataTst);
  // let allData = await res.json();
  // console.log(allData);
   // console.log(await res.json());
@@ -161,5 +166,17 @@ const Home: NextPage = () => {
     </div>
   );
 };
+export const getStaticProps: GetStaticProps = async(context) => {
+  // Set states by passing in as props, no need for loading state?
+  const { otherProjects, projects, singleFields, skills} = await getResumeData();
+  if(!otherProjects || !projects || !singleFields || !skills) throw new Error('Failed to fetch Resume Data google');
+ // console.log({otherProjects, projects, singleFields, skills});
+
+  let allData = JSON.stringify({ otherProjects, projects, singleFields, skills});
+  return {
+    props: { allData }
+    //revalidate: 60, // after 60 seconds it will update the old cached version 
+  }
+}
 
 export default Home;
