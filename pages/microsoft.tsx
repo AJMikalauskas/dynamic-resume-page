@@ -16,7 +16,7 @@ const microsoft = ({allData}:Props) => {
 // SSG - getStaticProps vs SSR - getServerSideProps?
 //async function - serverside renders at runtime?
 
-export const getServerSideProps: GetServerSideProps = async(context) => {
+export const getStaticProps: GetStaticProps = async(context) => {
   // Set states by passing in as props, no need for loading state?
   //setIsLoading(true);
   //let data: fields;

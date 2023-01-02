@@ -16,7 +16,7 @@ const google = ({allData}:Props) => {
 }
 // SSG - getStaticProps vs SSR - getServerSideProps?
 //async function
-export const getServerSideProps: GetServerSideProps = async(context) => {
+export const getStaticProps: GetStaticProps = async(context) => {
   // Set states by passing in as props, no need for loading state?
   // Test
   let allData = await getResumeData();

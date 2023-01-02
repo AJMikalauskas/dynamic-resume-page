@@ -16,7 +16,7 @@ const facebook = ({allData}:Props) => {
 }
 // SSG - getStaticProps vs SSR - getServerSideProps?
 //async function
-export const getServerSideProps: GetServerSideProps = async(context) => {
+export const getStaticProps: GetStaticProps = async(context) => {
   // Set states by passing in as props, no need for loading state?
   let allData = await getResumeData();
  // if(!allData.otherProjects || !allData.projects || !allData.singleFields || !allData.skills) throw new Error('Failed to fetch Resume Data facebook');
