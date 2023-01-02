@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async(context) => {
   // });
   // let returnData = await res;
   let allData = await getResumeData();
-  if(!allData.otherProjects || !allData.projects || !allData.singleFields || !allData.skills) throw new Error('Failed to fetch Resume Data google');
+  if(!allData.otherProjects || !allData.projects || !allData.singleFields || !allData.skills) throw new Error('Failed to fetch Resume Data microsoft');
  // console.log({otherProjects, projects, singleFields, skills});
 
   //allData = JSON.stringify(allData);

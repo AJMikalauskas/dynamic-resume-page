@@ -18,13 +18,13 @@ const google = ({allData}:Props) => {
 //async function
 export const getServerSideProps: GetServerSideProps = async(context) => {
   // Set states by passing in as props, no need for loading state?
-  const { otherProjects, projects, singleFields, skills} = await getResumeData();
-  if(!otherProjects || !projects || !singleFields || !skills) throw new Error('Failed to fetch Resume Data google');
+  let allData = await getResumeData();
+  if(!allData.otherProjects || !allData.projects || !allData.singleFields || !allData.skills) throw new Error('Failed to fetch Resume Data google');
  // console.log({otherProjects, projects, singleFields, skills});
 
-  let allData = JSON.stringify({ otherProjects, projects, singleFields, skills});
+
   return {
-    props: { allData }
+    props: { allData: JSON.stringify(allData) }
     //revalidate: 60, // after 60 seconds it will update the old cached version 
   }
 }
