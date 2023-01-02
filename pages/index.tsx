@@ -1,86 +1,165 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import React, { Suspense, useRef, useState, useEffect } from "react";
+import axios from "axios";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import microsoftTemplateSmall from "../public/images/microsoftTemplateSmall.png";
+import googleTemplateSmall from "../public/images/googleTemplateSmall.png";
+import facebookTemplateSmall from "../public/images/facebookTemplateSmall.png";
+
+
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { NextPage } from "next";
+import Image from "next/image";
+import Animation from "../components/Animation";
+import Head from "next/head";
+const NewsletterSubscribe = dynamic(
+  () => import("../components/NewsletterSubscribe"),
+  {
+    loading: LoadingSpinner,
+  }
+);
+
+  // Main Project Pages
+//const CryptoAppProj = React.lazy(() => import("./components/CryptoApp"));
+//const DappProj = React.lazy(() => import("./components/FacebookTemplate"));
+
+  // Missing 404 Page
+//const Missing404 = React.lazy(() => import("./components/Missing404"));
 
 const Home: NextPage = () => {
+  // const [data,setData] = useState({});
+  // const effectRan = useRef(false);
+
+  // const pushTestReq = async() => {
+  //   try {
+  //     const res = await axios.get("http://localhost:5000/retrieveAllData");
+  //     //console.log(res.data);
+  //     console.log("successful in adding to database");
+  //     // const { otherProjects, projects, singleFields, skills} = res.data;
+  //     console.log(typeof res.data)
+  //     setData(res.data);
+  //   }catch(err) {
+  //     console.log(err);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   if(effectRan.current === false) {
+  //     pushTestReq();
+
+  //     return () =>  {
+  //       console.log('unmounted')
+  //       effectRan.current = true;
+  //     }
+  // }
+
+  // }, [])
+
+  const retrieveData = async() => {
+    let dataTst;
+    let res = await fetch("http://localhost:3000/api/retrieveAllData", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((response) => {
+    return response.json();
+  }).then((data) =>{
+    //console.log(data);
+    //console.log(data.data);
+    //return JSON.parse(data);
+    return data;
+  }).catch((err) => {
+    console.log(err);
+    //setSubmitted(false);
+  });
+  dataTst = await res;
+
+  console.log(dataTst);
+ // let allData = await res.json();
+ // console.log(allData);
+  // console.log(await res.json());
+  }
+
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <div className="text-white bg bg-gradient-to-r from-[#159957] to-[#155799] w-full h-full">
+        {/* <Head>
+        <title>Xander's Dynamic Resume</title>
+        <link
+          href="'https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap'"
+          rel="stylesheet"
+        />
+      </Head> */}
+      <Animation/>
+      <Suspense
+        fallback={
+          <div className="">
+            <LoadingSpinner />
+          </div>
+        }
+      >
+        <div className="p-14">
+          <div className="text-center z-10 relative">
+            <div className="border border-white text-white p-4 justify-center item-center">
+              <div className="text-center m-auto max-w-[800px]">
+                <p className="text-4xl font-bold mb-2">Hi, I'm Alexander</p>
+                <p className="">
+                  {" "}
+                  Thanks for visiting My Dynamic Resume Page! Feel free to
+                  explore all 3 templates and subscribe to my newsletter while
+                  you're here!
+                </p>
+                {/* <button onClick={retrieveData}>Test Return</button> */}
+              </div>
+            </div>
+          </div>
+          <div className="mt-[50px] mx-[5%] justify-evenly flex h-[400px] font-semibold z-20 relative">
+            {/* lg is laptop size screen */}
+            <Link
+              href="/microsoft"
+              className="hover:scale-125 text-center w-[275px] md:w-[225px]"
+              style={{ transition: "transform .5s" }}
+            >
+              <div>Microsoft</div>
+              <Image
+                src={microsoftTemplateSmall}
+                alt="microsoft-template-small"
+                className=" w-[100%] items-center h-full"
+              />
+            </Link>
+            <Link
+              href="/google"
+              className="hover:scale-125 text-center w-[275px] md:w-[225px]"
+              style={{ transition: "transform .5s" }}
+            >
+              <div>Google</div>
+              <Image
+                src={googleTemplateSmall}
+                alt="google-template-small"
+                className="w-[100%] items-center h-full"
+                style={{ transition: "transform .5s" }}
+              />
+            </Link>
+            <Link
+              href="/facebook"
+              className="hover:scale-125 text-center w-[275px] md:w-[225px]"
+              style={{ transition: "transform .5s" }}
+            >
+              <div>Facebook</div>
+              <Image
+                src={facebookTemplateSmall}
+                alt="facebook-template-small"
+                className=" w-[100%] h-full items-center"
+                style={{ transition: "transform .5s" }}
+              />
+            </Link>
+          </div>
+          <NewsletterSubscribe />
         </div>
-      </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
+      </Suspense>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
