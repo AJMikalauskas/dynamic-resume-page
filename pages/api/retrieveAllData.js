@@ -1,4 +1,5 @@
 import getResumeData from "../../lib/retrieveData";
+// import { fields } from "../../typings";
 
 export default async function handler(
     req,

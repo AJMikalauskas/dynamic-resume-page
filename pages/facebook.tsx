@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps = async(context) => {
  // console.log({otherProjects, projects, singleFields, skills});
 
   return {
-    props: { allData: JSON.parse(JSON.stringify(allData)) }
+    props: { allData }
     //revalidate: 60, // after 60 seconds it will update the old cached version 
   }
 }
