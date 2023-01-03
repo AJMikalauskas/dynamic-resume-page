@@ -64,6 +64,7 @@ const microsoft = ({allData}:Props) => {
 //   }
 // }
 microsoft.getInitialProps = async() => {
+  console.log(`${server}/api`);
   let otherProjectsData = await fetch(`${server}/api/flutter`, {
     method: "POST",
     headers: {
