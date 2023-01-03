@@ -64,6 +64,7 @@ const microsoft = ({allData}:Props) => {
 //   }
 // }
 microsoft.getInitialProps = async() => {
+  console.log(`${server}/api/retrieveAllData`);
   let resumeData = await fetch(`${server}/api/retrieveAllData`, {
     method: "GET",
     headers: {
