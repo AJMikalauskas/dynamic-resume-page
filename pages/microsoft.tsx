@@ -64,14 +64,39 @@ const microsoft = ({allData}:Props) => {
 //   }
 // }
 microsoft.getInitialProps = async() => {
-  console.log(`${server}/api/retrieveAllData`);
-  let resumeData = await fetch(`${server}/api/retrieveAllData`, {
-    method: "GET",
+  let otherProjectsData = await fetch(`${server}/api/flutter`, {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({ collection_name: "other-projects"})
   });
-  const json = await resumeData.json();
+
+  let projectsData = await fetch(`${server}/api/flutter`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ collection_name: "projects"})
+  });
+
+  let singleFieldsData = await fetch(`${server}/api/flutter`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ collection_name: "single-fields"})
+  });
+
+  let skillsData = await fetch(`${server}/api/flutter`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ collection_name: "skills"})
+  });
+  const json = { otherProjects: await otherProjectsData.json(), projects: await projectsData.json(),
+  singleFields: await singleFieldsData.json(), skills: await skillsData.json() };
   return {
     allData: json
   }
