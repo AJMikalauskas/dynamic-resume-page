@@ -16,10 +16,10 @@ export default async function handler(req, res) {
     const baseUrl = `${process.env.MONGODB_DATA_API_URL}/action`;
   //Connection-String-Via-Mongo-Compass: mongodb+srv://Xander_Mik:Isaiah558@cluster0.8stfsj5.mongodb.net/test
     try {
-      switch (req.method) {
+     // switch (req.method) {
         // All I do ever is pull data no post case but will be helpful in the future.
         // I use POSt so I can send in data of the collection_name via the body
-        case "GET":
+      //  case "GET":
             //console.log(req.body.collection_name);
             console.log("Checkpoint 1");
             //console.log(...fetchBody);
@@ -39,12 +39,13 @@ export default async function handler(req, res) {
           res.status(200).json(readDataJson.documents);
           console.log("Checkpoint 4");
           console.log(readDataJson.documents);
-          break;
-        default:
-          res.status(405).end();
-          break;
+         // break;
+       // default:
+        //  res.status(405).end();
+         // break;
       }
-    } catch (error) {
+   // }
+     catch (error) {
       console.error(error);
       res.status(500).json({ error });
     }
