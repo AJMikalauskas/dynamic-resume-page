@@ -96,8 +96,12 @@ microsoft.getInitialProps = async() => {
     },
     body: JSON.stringify({ collection_name: "skills"})
   });
+  //console.log(await otherProjectsData);
   const json = { otherProjects: await otherProjectsData.json(), projects: await projectsData.json(),
   singleFields: await singleFieldsData.json(), skills: await skillsData.json() };
+  //const projects = await otherProjectsData.json();
+  //console.log(projects);
+  //const json = "Test";
   return {
     allData: json
   }
