@@ -33,6 +33,13 @@ export default async function handler(
     } catch(err) {
         console.log(err);
         console.log(err.response.data);
+        if(err.response.data.detail.includes("is already a list member")) {
+            const errorSplit = err?.response?.data?.detail.split('. ');
+
+            return res.status(400).json({
+                error: `${errorSplit[0]}.`,
+            })
+        }
         //console.log(err.data.detail);
         return res.status(400).json({
             error: `${err?.response?.data?.detail}`,
