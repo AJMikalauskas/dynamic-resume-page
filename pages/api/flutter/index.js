@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         collection: req.body.collection_name
         //req.body.collection_name --> for later
     };
-    const baseUrl = `${process.env.MONGODB_DATA_API_URL}/action`;
+    //const baseUrl = `${process.env.MONGODB_DATA_API_URL}/action`;
   //Connection-String-Via-Mongo-Compass: mongodb+srv://Xander_Mik:Isaiah558@cluster0.8stfsj5.mongodb.net/test
     try {
       switch (req.method) {
@@ -23,9 +23,9 @@ export default async function handler(req, res) {
             console.log(req.body.collection_name);
             console.log("Checkpoint 1");
             //console.log(...fetchBody);
-            console.log(baseUrl);
+           // console.log(baseUrl);
             console.log(fetchOptions);
-          const readData = await fetch(`${baseUrl}/find`, {
+          const readData = await fetch('https://data.mongodb-api.com/app/data-xmjnw/endpoint/data/v1/action/find', {
             ...fetchOptions,
             body: JSON.stringify({...fetchBody}),
             });
