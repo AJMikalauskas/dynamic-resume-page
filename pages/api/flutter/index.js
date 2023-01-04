@@ -19,6 +19,7 @@ export default async function handler(req, res) {
       switch (req.method) {
         // All I do ever is pull data no post case but will be helpful in the future.
         // I use POSt so I can send in data of the collection_name via the body
+        //${process.env.MONGODB_DATA_API_URL}
         case "POST":
             console.log(req.body.collection_name);
             console.log("Checkpoint 1");

@@ -1,3 +1,4 @@
+import axios from "axios";
 export default async function handler(
     req,
     res
@@ -30,7 +31,8 @@ export default async function handler(
         return res.status(200).json({ msg: "You have successfully signed up for the newsletter!"});
         //json({response});
     } catch(err) {
-        //console.log(err.response.data);
+        console.log(err);
+        console.log(err.response.data);
         //console.log(err.data.detail);
         return res.status(400).json({
             error: `${err?.response?.data?.detail}`,

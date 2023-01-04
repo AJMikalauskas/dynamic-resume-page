@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import axios from "axios";
+import { server } from '../config';
 
 const NewsletterSubscribe = () => {
     //const MAILCHIMP_URL = process.env.PUBLIC_MAILCHIMP_URL;
@@ -16,7 +17,7 @@ const NewsletterSubscribe = () => {
 
         try {
             // Need to change this routing
-            const response = await axios.post("http://localhost:3000/api/addSubscriber", { email });
+            const response = await axios.post(`${server}/api/addSubscriber`, { email });
             const data = await response.data;
             setStatus(response.status);
             setState(data.msg)
