@@ -3,6 +3,9 @@ import MicrosoftResume from "../components/MicrosoftResume"
 import { fields } from "../typings"
 import getResumeData from "../lib/retrieveData";
 import {server} from "../config";
+import { useSelector, useDispatch} from 'react-redux';
+import { store } from "../store";
+import { getAllResumeData } from "../slices/resumeDataSlice";
 
 interface Props {
   allData: fields,
@@ -24,9 +27,16 @@ const fetchResumeData = async () => {
 };
 
 const microsoft = ({allData}:Props) => {
+ // const data = useSelector(getAllResumeData);
+  //console.log("data...", data);
+ // console.log(store.getState());
+  //console.log(store.getState().resumeData);
+  let propsPassedInViaRedux = store.getState().resumeData.data;
+  // .resumeData.data
   //console.log(allData);
   return (
-     <MicrosoftResume data={allData} />
+    // How to send data down via props, we get data back and data property set to correct data, but how do we send???
+     <MicrosoftResume data={propsPassedInViaRedux} />
   )
 }
 // SSG - getStaticProps vs SSR - getServerSideProps?
@@ -63,47 +73,47 @@ const microsoft = ({allData}:Props) => {
 //     //revalidate: 60, // after 60 seconds it will update the old cached version 
 //   }
 // }
-microsoft.getInitialProps = async() => {
-  console.log(`${server}/api`);
-  let otherProjectsData = await fetch(`${server}/api/flutter`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ collection_name: "other-projects"})
-  });
+// microsoft.getInitialProps = async() => {
+//   console.log(`${server}/api`);
+//   let otherProjectsData = await fetch(`${server}/api/flutter`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ collection_name: "other-projects"})
+//   });
 
-  let projectsData = await fetch(`${server}/api/flutter`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ collection_name: "projects"})
-  });
+//   let projectsData = await fetch(`${server}/api/flutter`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ collection_name: "projects"})
+//   });
 
-  let singleFieldsData = await fetch(`${server}/api/flutter`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ collection_name: "single-fields"})
-  });
+//   let singleFieldsData = await fetch(`${server}/api/flutter`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ collection_name: "single-fields"})
+//   });
 
-  let skillsData = await fetch(`${server}/api/flutter`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ collection_name: "skills"})
-  });
-  //console.log(await otherProjectsData);
-  const json = { otherProjects: await otherProjectsData.json(), projects: await projectsData.json(),
-  singleFields: await singleFieldsData.json(), skills: await skillsData.json() };
-  //const projects = await otherProjectsData.json();
-  //console.log(projects);
-  //const json = "Test";
-  return {
-    allData: json
-  }
-}
+//   let skillsData = await fetch(`${server}/api/flutter`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ collection_name: "skills"})
+//   });
+//   //console.log(await otherProjectsData);
+//   const json = { otherProjects: await otherProjectsData.json(), projects: await projectsData.json(),
+//   singleFields: await singleFieldsData.json(), skills: await skillsData.json() };
+//   //const projects = await otherProjectsData.json();
+//   //console.log(projects);
+//   //const json = "Test";
+//   return {
+//     allData: json
+//   }
+// }
 export default microsoft;

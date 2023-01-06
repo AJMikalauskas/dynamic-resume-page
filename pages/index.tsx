@@ -13,6 +13,8 @@ import Image from "next/image";
 import Animation from "../components/Animation";
 import Head from "next/head";
 import getResumeData from "../lib/retrieveData";
+import { store } from "../store";
+import { fetchResumeData } from "../slices/resumeDataSlice";
 const NewsletterSubscribe = dynamic(
   () => import("../components/NewsletterSubscribe"),
   {
@@ -85,7 +87,7 @@ const Home: NextPage = () => {
  // console.log(allData);
   // console.log(await res.json());
   }
-
+ store.dispatch(fetchResumeData());
 
   return (
     <div className="text-white bg bg-gradient-to-r from-[#159957] to-[#155799] w-full h-full">

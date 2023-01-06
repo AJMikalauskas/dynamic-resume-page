@@ -4,6 +4,7 @@ import MicrosoftResume from "../components/MicrosoftResume";
 import { fields } from "../typings";
 import getResumeData from "../lib/retrieveData";
 import { server } from "../config";
+import { store } from "../store";
 
 interface Props {
   allData: fields;
@@ -26,7 +27,10 @@ interface Props {
 
 const google = ({ allData }: Props) => {
   //console.log(allData);
-  return <GoogleResume data={allData} />;
+ // console.log(store.getState());
+ // console.log(store.getState().resumeData);
+  let propsPassedInViaRedux = store.getState().resumeData.data;
+  return <GoogleResume data={propsPassedInViaRedux} />;
 };
 // SSG - getStaticProps vs SSR - getServerSideProps?
 //async function
@@ -43,42 +47,42 @@ const google = ({ allData }: Props) => {
 //     //revalidate: 60, // after 60 seconds it will update the old cached version
 //   };
 // };
-google.getInitialProps = async() => {
-  let otherProjectsData = await fetch(`${server}/api/flutter`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ collection_name: "other-projects"})
-  });
+// google.getInitialProps = async() => {
+//   let otherProjectsData = await fetch(`${server}/api/flutter`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ collection_name: "other-projects"})
+//   });
 
-  let projectsData = await fetch(`${server}/api/flutter`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ collection_name: "projects"})
-  });
+//   let projectsData = await fetch(`${server}/api/flutter`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ collection_name: "projects"})
+//   });
 
-  let singleFieldsData = await fetch(`${server}/api/flutter`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ collection_name: "single-fields"})
-  });
+//   let singleFieldsData = await fetch(`${server}/api/flutter`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ collection_name: "single-fields"})
+//   });
 
-  let skillsData = await fetch(`${server}/api/flutter`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ collection_name: "skills"})
-  });
-  const json = { otherProjects: await otherProjectsData.json(), projects: await projectsData.json(),
-  singleFields: await singleFieldsData.json(), skills: await skillsData.json() };
-  return {
-    allData: json
-  }
-}
+//   let skillsData = await fetch(`${server}/api/flutter`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({ collection_name: "skills"})
+//   });
+//   const json = { otherProjects: await otherProjectsData.json(), projects: await projectsData.json(),
+//   singleFields: await singleFieldsData.json(), skills: await skillsData.json() };
+//   return {
+//     allData: json
+//   }
+// }
 export default google;

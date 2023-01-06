@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "middleware/mongodb.js", "models/Projects.js", "pages/api/retrieveAllData.js", "pages/microsoft.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "middleware/mongodb.js", "models/Projects.js", "pages/api/retrieveAllData.js", "pages/microsoft.tsx", "slices/resumeDataSlice.js", "slices/resumeDataSlice.js", "store.js"],
   "exclude": ["node_modules"]
 }

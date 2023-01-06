@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     const fetchBody = {
         dataSource: process.env.MONGODB_DATA_SOURCE,
         database: 'DynamicResumeDB',
-        collection: req.body.collection_name
+       collection: req.body.collection_name
         //req.body.collection_name --> for later
     };
     //const baseUrl = `${process.env.MONGODB_DATA_API_URL}/action`;
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
         // I use POSt so I can send in data of the collection_name via the body
         //${process.env.MONGODB_DATA_API_URL}
         case "POST":
-            console.log(req.body.collection_name);
+           // console.log(req.body.collection_name);
             console.log("Checkpoint 1");
             //console.log(...fetchBody);
            // console.log(baseUrl);
